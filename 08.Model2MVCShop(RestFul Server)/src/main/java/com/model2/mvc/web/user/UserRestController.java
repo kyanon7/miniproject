@@ -1,24 +1,16 @@
 package com.model2.mvc.web.user;
 
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.model2.mvc.common.Page;
-import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.user.UserService;
 
@@ -62,4 +54,36 @@ public class UserRestController {
 		
 		return dbUser;
 	}
+	
+	@RequestMapping( value="json/updateUser/{userId}", method=RequestMethod.GET )
+	public User updateUser( @PathVariable String userId ) throws Exception{
+		
+		System.out.println("/user/json/UpdateUser : GET");
+		
+		User user = userService.getUser(userId);
+		
+		return user;
+	}
+	
+	@RequestMapping( value="json/updateUser", method=RequestMethod.POST)
+	public User updateUser(@RequestBody User user) throws Exception{
+		
+		System.out.println("/user/json/UpdateUser : POST");
+		
+		userService.updateUser(user);
+		User user01 = userService.getUser(user.getUserId());
+		
+		return user01;
+	}
+	
+	@RequestMapping( value="json/addUser", method=RequestMethod.POST )
+	public User addUser( @RequestBody User user ) throws Exception{
+		
+		System.out.println("/user/json/addUser : POST");
+		
+		userService.addUser(user);
+		
+		return userService.getUser(user.getUserId());
+	}
+
 }
