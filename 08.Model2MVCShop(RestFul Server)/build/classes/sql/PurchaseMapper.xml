@@ -76,7 +76,7 @@
 	<delete id="removePurchase"	parameterType="int">
 	 	DELETE
 	 	FROM transaction
-	 	WHERE tran_name = #{value}
+	 	WHERE tran_no = #{value}
 	</delete>
 	
 	<!-- SQL : SELECT Purchase LIST -->

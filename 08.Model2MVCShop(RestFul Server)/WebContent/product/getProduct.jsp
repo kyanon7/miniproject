@@ -20,6 +20,8 @@
 
 <form name="detailForm" method="post">
 
+<input type="hidden" name="fileName" value="${product.fileName}"/>
+
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
 		<td width="15" height="37"><img src="/images/ct_ttl_img01.gif"	width="15" height="37"></td>
@@ -73,7 +75,9 @@
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<img src = "/images/uploadFiles/${product.fileName}"/>
+			<c:forEach var="file" items="${fileList}">
+				<img src = "/images/uploadFiles/${file}"/><br/>
+			</c:forEach>
 		</td>
 	</tr>
 	<tr>

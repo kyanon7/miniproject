@@ -57,6 +57,7 @@ function fncAddProduct(){
 <form name="detailForm" method="post" enctype="multipart/form-data">
 
 <input type="hidden" name="prodNo" value="${product.prodNo}"/>
+<input type="hidden" name="fileName" value="${product.fileName}"/>
 
 <table width="100%" height="37" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -145,10 +146,10 @@ function fncAddProduct(){
 		<td width="104" class="ct_write">상품이미지</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<c:if test="${!empty product.fileName}">
-				<img src = "/images/uploadFiles/${product.fileName}"/><br/>
-			</c:if>
-			<input	type="file" name="imageFile" class="ct_input_g"
+			<c:forEach var="file" items="${fileList}">
+				<img src = "/images/uploadFiles/${file}"/><br/>
+			</c:forEach>
+			<input multiple="multiple"	type="file" name="imageFile" class="ct_input_g"
 						style="width: 200px; height: 19px" maxLength="13" value="${product.fileName}"/>
 		</td>
 	</tr>

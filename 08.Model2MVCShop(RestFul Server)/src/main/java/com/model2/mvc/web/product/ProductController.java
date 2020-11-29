@@ -1,7 +1,10 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -57,75 +60,74 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="addProduct", method=RequestMethod.POST)
-	public String addProduct( @ModelAttribute("product") Product product ) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product, Model model, MultipartHttpServletRequest request ) throws Exception {
 
 		System.out.println("/product/addProduct : POST");
 		//Business Logic
 		product.setManuDate(product.getManuDate().replace("-",""));
 		productService.addProduct(product);
+		product.setProdNo(productService.getLastProdNo());
+		
+		List<MultipartFile> files = request.getFiles("imageFile");
+		String path = request.getSession().getServletContext().getRealPath("/images/uploadFiles/"+(product.getProdNo() - 10000)/250);
+		List<String> fileList = productService.uploadFile(product, path, files);
+		productService.updateProduct(product);
+		
+		model.addAttribute("path", path);
+		model.addAttribute("fileList", fileList);
 		
 		return "forward:/product/productView.jsp";
 	}
 	
 	@RequestMapping(value="getProduct", method=RequestMethod.GET)
-	public String getProduct( @RequestParam("prodNo") int prodNo, Model model ) throws Exception {
+	public String getProduct( @RequestParam("prodNo") int prodNo, Model model, HttpServletRequest request ) throws Exception {
 		
 		System.out.println("/product/getProduct : GET");
 		//Business Logic
 		Product product = productService.getProduct(prodNo);
+		String path = request.getSession().getServletContext().getRealPath("/images/uploadFiles/"+(product.getProdNo() - 10000)/250);
+		
 		// Model 과 View 연결
+		model.addAttribute("fileList", productService.uploadFileView(product, path));
 		model.addAttribute("product", product);
 		
 		return "forward:/product/getProduct.jsp";
 	}
 	
 	@RequestMapping(value="updateProduct", method=RequestMethod.GET)
-	public String updateProduct( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
+	public String updateProduct( @RequestParam("prodNo") int prodNo , Model model, HttpServletRequest request ) throws Exception{
 
 		System.out.println("/product/updateProduct : GET");
 		//Business Logic
 		Product product = productService.getProduct(prodNo);
+		String path = request.getSession().getServletContext().getRealPath("/images/uploadFiles/"+(product.getProdNo() - 10000)/250);
+		
 		// Model 과 View 연결
+		model.addAttribute("fileList", productService.uploadFileView(product, path));
 		model.addAttribute("product", product);
 		
 		return "forward:/product/updateProduct.jsp";
 	}
 	
-//	@RequestParam("fileName") MultipartFile file
 	@RequestMapping(value="updateProduct", method=RequestMethod.POST)
-	public String updateProduct( @ModelAttribute("product") Product product, MultipartHttpServletRequest request) throws Exception{
+	public String updateProduct( @ModelAttribute("product") Product product, Model model, MultipartHttpServletRequest request) throws Exception{
 
 		System.out.println("/product/updateProduct : POST");
+		
 		//Business Logic
-		
-		String path = "C:\\workspace\\git\\minipro\\minipro\\07.Model2MVCShop(URI,pattern)\\WebContent\\images\\uploadFiles";
-		
-		System.out.println(path);
-		
-		MultipartFile file = request.getFile("imageFile");
-		System.out.println(!file.getOriginalFilename().isEmpty());
-		
-		
-		if(!file.getOriginalFilename().isEmpty()) {
-			
-			String pathName = file.getOriginalFilename();
-			int idx = pathName.lastIndexOf("\\");
-			if(idx == -1) {
-				idx = pathName.lastIndexOf("/");
-			}
-			String fileName = pathName.substring(idx + 1);
-			product.setFileName(fileName);
-			file.transferTo(new File(path, fileName));
-		}
-		
-		
+		List<MultipartFile> files = request.getFiles("imageFile");
+		String path = request.getSession().getServletContext().getRealPath("/images/uploadFiles/"+(product.getProdNo() - 10000)/250);
+		List<String> fileList = productService.uploadFile(product, path, files);
 		productService.updateProduct(product);
+		
+		model.addAttribute("path", path);
+		model.addAttribute("fileList", fileList);
 		
 		return "redirect:/product/getProduct?prodNo="+product.getProdNo()+"&menu=manage";
 	}
 	
 	@RequestMapping(value="listProduct")
-	public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request) throws Exception{
+	public String listProduct( @ModelAttribute("search") Search search , Model model , HttpServletRequest request ) throws Exception{
 		
 		System.out.println("/product/listProduct : GET / POST");
 		

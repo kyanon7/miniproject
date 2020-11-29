@@ -137,7 +137,7 @@ function resetData(){
 		<td width="104" class="ct_write">상품 이미지</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input		type="file" name="fileName" class="ct_input_g" 
+			<input multiple="multiple" type="file" name="imageFile" class="ct_input_g" 
 							style="width: 300px; height: 19px" maxLength="20"/>
 		</td>
 	</tr>

@@ -33,6 +33,13 @@
 		WHERE prod_no = #{value}
 	</select>
 	
+	<!-- SQL : LAST ONE -->
+	<select id="lastProdNo" resultType="int">
+		SELECT
+		MAX(prod_no)
+		FROM product
+	</select>
+	
 	<!-- SQL : UPDATE -->
 	<update	id="updateProduct"	parameterType="com.model2.mvc.service.domain.Product" >
 		UPDATE product
@@ -47,10 +54,10 @@
 	</update>
 	
 	<!-- SQL : REMOVE -->
-	<delete id="removeProduct"	parameterType="string">
+	<delete id="removeProduct"	parameterType="int">
 	 	DELETE
 	 	FROM product
-	 	WHERE prod_name = #{value}
+	 	WHERE prod_no = #{value}
 	</delete>
 	
 	<!-- SQL : SELECT LIST -->

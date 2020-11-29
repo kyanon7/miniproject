@@ -70,6 +70,6 @@ public class Product {
 	public String toString() {
 		return "ProductVO : [fileName]=> " + fileName
 				+ " [manuDate]=> " + manuDate+ " [price]=> " + price + " [prodDetail]=> " + prodDetail
-				+ " [prodName]=> " + prodName;
+				+ " [prodName]=> " + prodName+ " [prodNo]=> " + prodNo;
 	}	
 }

@@ -13,6 +13,9 @@ public interface ProductDao {
 	// SELECT ONE
 	public Product getProduct(int prodNo) throws Exception;
 	
+	// LAST ONE
+	public int lastProductNo() throws Exception;
+	
 	// SELECT LIST
 	public List<Product> getProductList(Search search) throws Exception;
 	

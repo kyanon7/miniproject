@@ -1,12 +1,16 @@
 package com.model2.mvc.service.product.impl;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
@@ -36,6 +40,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.getProduct(prodNo);
 	}
 	
+	public int getLastProdNo() throws Exception{
+		return productDao.lastProductNo();
+	}
+	
 	public Map<String, Object> getProductList(Search search) throws Exception {
 		
 		List<Product> list = productDao.getProductList(search);
@@ -50,5 +58,49 @@ public class ProductServiceImpl implements ProductService {
 	
 	public void updateProduct(Product product) throws Exception {
 		productDao.updateProduct(product);
+	}
+	
+	public List<String> uploadFileView(Product product, String path) throws Exception{
+		
+		File files[] = new File(path).listFiles();
+		List<String> fileList = new ArrayList<String>();
+		for(int i = 0; i < files.length; i++) {
+			File file = files[i];
+			if(file.getName().startsWith(product.getFileName())) {
+				fileList.add((product.getProdNo() - 10000)/250+"\\"+file.getName());
+			}
+		}
+		
+		return fileList;
+	}
+	
+	public List<String> uploadFile(Product product, String path, List<MultipartFile> files) throws Exception{
+		
+		String identify = UUID.randomUUID().toString();
+		StringBuffer fileNames = new StringBuffer(identify);
+		List<String> fileList = new ArrayList<String>();
+		
+		
+		if(!files.isEmpty() && !files.get(0).getOriginalFilename().equals("")) {
+			File file = new File(path);
+			if(file.exists() == false) {
+				file.mkdirs();
+			}
+			
+			for(int i = 0; i < files.size(); i++) {
+				String pathName = files.get(i).getOriginalFilename();
+				int idx = pathName.lastIndexOf("\\");
+				if(idx == -1) {
+					idx = pathName.lastIndexOf("/");
+				}
+				String fileName = identify+"_"+pathName.substring(idx + 1);
+				files.get(i).transferTo(new File(path, fileName));
+				fileList.add((product.getProdNo() - 10000)/250+"\\"+fileName);
+				
+			}
+			product.setFileName(fileNames.toString());
+		}
+		
+		return fileList;
 	}
 }
