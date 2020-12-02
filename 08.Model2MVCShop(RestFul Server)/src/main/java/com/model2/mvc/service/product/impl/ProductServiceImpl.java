@@ -64,13 +64,14 @@ public class ProductServiceImpl implements ProductService {
 		
 		File files[] = new File(path).listFiles();
 		List<String> fileList = new ArrayList<String>();
-		for(int i = 0; i < files.length; i++) {
-			File file = files[i];
-			if(file.getName().startsWith(product.getFileName())) {
-				fileList.add((product.getProdNo() - 10000)/250+"\\"+file.getName());
+		if(files.length > 0 && product.getFileName() != null && !product.getFileName().equals("")) {
+			for(int i = 0; i < files.length; i++) {
+				File file = files[i];
+				if(file.getName().startsWith(product.getFileName()) && !(product.getFileName()).isEmpty()) {
+					fileList.add((product.getProdNo() - 10000)/250+"\\"+file.getName());
+				}
 			}
 		}
-		
 		return fileList;
 	}
 	
