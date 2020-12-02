@@ -3,7 +3,10 @@ package com.model2.mvc.service.product;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
@@ -27,9 +30,9 @@ public interface ProductService {
 	public void updateProduct(Product product) throws Exception;
 	
 	// 상품정보 이미지 파일 보기 
-	public List<String> uploadFileView(Product product, String path) throws Exception;
+	public List<String> uploadFileView(Product product, HttpServletRequest request) throws Exception;
 	
 	// 상품정보 이미지 파일 추가 및 수정
-	public List<String> uploadFile(Product product, String path, List<MultipartFile> files) throws Exception;
+	public List<String> uploadFile(Product product, MultipartHttpServletRequest request) throws Exception;
 	
 }

@@ -7,10 +7,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
@@ -60,8 +63,9 @@ public class ProductServiceImpl implements ProductService {
 		productDao.updateProduct(product);
 	}
 	
-	public List<String> uploadFileView(Product product, String path) throws Exception{
+	public List<String> uploadFileView(Product product, HttpServletRequest request) throws Exception{
 		
+		String path = request.getSession().getServletContext().getRealPath("/images/uploadFiles/"+(product.getProdNo() - 10000)/250);
 		File files[] = new File(path).listFiles();
 		List<String> fileList = new ArrayList<String>();
 		if(files.length > 0 && product.getFileName() != null && !product.getFileName().equals("")) {
@@ -75,7 +79,10 @@ public class ProductServiceImpl implements ProductService {
 		return fileList;
 	}
 	
-	public List<String> uploadFile(Product product, String path, List<MultipartFile> files) throws Exception{
+	public List<String> uploadFile(Product product, MultipartHttpServletRequest request) throws Exception{
+		
+		List<MultipartFile> files = request.getFiles("imageFile");
+		String path = request.getSession().getServletContext().getRealPath("/images/uploadFiles/"+(product.getProdNo() - 10000)/250);
 		
 		String identify = UUID.randomUUID().toString();
 		StringBuffer fileNames = new StringBuffer(identify);

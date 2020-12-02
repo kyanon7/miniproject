@@ -1,58 +1,137 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page pageEncoding="EUC-KR"%>
+
+<!DOCTYPE html>
 
 <html>
 <head>
-<title>회원가입</title>
+	<meta charset="EUC-KR">
+	<title>회원가입</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<link rel="stylesheet" href="/css/admin.css" type="text/css">
 
-<script type="text/javascript">
+	<!-- CDN(Content Delivery Network) 호스트 사용 -->
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
 
-function fncAddUser() {
-	// Form 유효성 검증
-	var id=document.detailForm.userId.value;
-	var pw=document.detailForm.password.value;
-	var pw_confirm=document.detailForm.password2.value;
-	var name=document.detailForm.userName.value;
+	//=====기존Code 주석 처리 후  jQuery 변경 ======//
+	function fncAddUser() {
+		// Form 유효성 검증
+		//var id=document.detailForm.userId.value;
+		//var pw=document.detailForm.password.value;
+		//var pw_confirm=document.detailForm.password2.value;
+		//var name=document.detailForm.userName.value;
+		
+		var id=$("input[name='userId']").val();
+		var pw=$("input[name='password']").val();
+		var pw_confirm=$("input[name='password2']").val();
+		var name=$("input[name='userName']").val();
 	
-	if(id == null || id.length <1){
-		alert("아이디는 반드시 입력하셔야 합니다.");
-		return;
-	}
-	if(pw == null || pw.length <1){
-		alert("패스워드는  반드시 입력하셔야 합니다.");
-		return;
-	}
-	if(pw_confirm == null || pw_confirm.length <1){
-		alert("패스워드 확인은  반드시 입력하셔야 합니다.");
-		return;
-	}
-	if(name == null || name.length <1){
-		alert("이름은  반드시 입력하셔야 합니다.");
-		return;
-	}
-	
-	if(document.detailForm.password.value != document.detailForm.password2.value) {
-		alert("비밀번호 확인이 일치하지 않습니다.");
-		document.detailForm.password2.focus();
-		return;
+		if(id == null || id.length <1){
+			alert("아이디는 반드시 입력하셔야 합니다.");
+			return;
+		}
+		if(pw == null || pw.length <1){
+			alert("패스워드는  반드시 입력하셔야 합니다.");
+			return;
+		}
+		if(pw_confirm == null || pw_confirm.length <1){
+			alert("패스워드 확인은  반드시 입력하셔야 합니다.");
+			return;
+		}
+		if(name == null || name.length <1){
+			alert("이름은  반드시 입력하셔야 합니다.");
+			return;
+		}
+		
+		//if(document.detailForm.password.value != document.detailForm.password2.value) {
+		if( pw != pw_confirm ) {
+			alert("비밀번호 확인이 일치하지 않습니다.");
+			//document.detailForm.password2.focus();
+			$("input:text[name='password2']").focus();
+			return;
+		}
+			
+		//if(document.detailForm.phone2.value != "" && document.detailForm.phone2.value != "") {
+		//	document.detailForm.phone.value = document.detailForm.phone1.value + "-" + document.detailForm.phone2.value + "-" + document.detailForm.phone3.value;
+		//} else {
+		//	document.detailForm.phone.value = "";
+		//}
+		
+		var value = "";	
+		if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
+			var value = $("option:selected").val() + "-" 
+								+ $("input[name='phone2']").val() + "-" 
+								+ $("input[name='phone3']").val();
+		}
+		//Debug..
+		//alert("phone : "+value)
+		$("input:hidden[name='phone']").val( value );
+		
+		//document.detailForm.action='/user/addUser';
+		//document.detailForm.submit();
+		$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 	}
 		
-	if(document.detailForm.phone2.value != "" && document.detailForm.phone2.value != "") {
-		document.detailForm.phone.value = document.detailForm.phone1.value + "-" + document.detailForm.phone2.value + "-" + document.detailForm.phone3.value;
-	} else {
-		document.detailForm.phone.value = "";
-	}
+	//===========================================//
+	//==> 추가된부분 : "가입"  Event 연결
+	 $(function() {
+		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+		 $( "td.ct_btn01:contains('가입')" ).on("click" , function() {
+			//Debug..
+			//alert(  $( "td.ct_btn01:contains('가입')" ).html() );
+			fncAddUser();
+		});
+	});	
+		
+	/*============= jQuery 변경 주석처리 =============
+		function resetData() {
+				document.detailForm.reset();
+		}========================================	*/
+		//==> 추가된부분 : "취소"  Event 처리 및  연결
+		$(function() {
+			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+			 $( "td.ct_btn01:contains('취소')" ).on("click" , function() {
+					//Debug..
+					//alert(  $( "td.ct_btn01:contains('취소')" ).html() );
+					$("form")[0].reset();
+			});
+		});	
 	
-	/////////////////////////////////////////////////////////////////////////////////
-	//document.detailForm.action='/addUser.do';
-	/////////////////////////////////////////////////////////////////////////////////
-	document.detailForm.action='/user/addUser';
 	
-	document.detailForm.submit();
+		/////////////////////////////////////////////////////////////////////////////////
+		//document.detailForm.action='/addUser.do';
+		/////////////////////////////////////////////////////////////////////////////////
+		//document.detailForm.action='/user/addUser';
+		
+		//document.detailForm.submit();
+		
+	 /*============= jQuery 변경 주석처리 =============
+		function check_email(frm) {
+			var email=document.detailForm.email.value;
+		    if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)){
+		    	alert("이메일 형식이 아닙니다.");
+				return false;
+		    }
+		    return true;
+		}========================================	*/
+		//==> 추가된부분 : "이메일" 유효성Check  Event 처리 및 연결
+		 $(function() {
+			 
+			 $("input[name='email']").on("change" , function() {
+				
+				 var email=$("input[name='email']").val();
+			    
+				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+			    	alert("이메일 형식이 아닙니다.");
+			     }
+			});
+			 
+		});	
 	
-}
-
+/*
 function check_email(frm) {
 	alert
 	var email=document.detailForm.email.value;
@@ -62,7 +141,7 @@ function check_email(frm) {
     }
     return true;
 }
-
+*/
 function checkSsn() {
 	var ssn1, ssn2; 
 	var nByear, nTyear; 
@@ -92,15 +171,34 @@ function PortalJuminCheck(fieldValue){
 	var mod = sum % 11;
 	return ((11 - mod) % 10 == last) ? true : false;
 }
-
-function fncCheckDuplication() {
-	popWin 
-		= window.open("/user/checkDuplication.jsp","popWin", "left=300,top=200,width=300,height=200,marginwidth=0,marginheight=0,scrollbars=no,scrolling=no,menubar=no,resizable=no");
-}
-
+/*
 function resetData() {
 	document.detailForm.reset();
 }
+*/
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*============= jQuery 변경 주석처리 =============
+function fncCheckDuplication() {
+	popWin 
+		= window.open("/user/checkDuplication.jsp",
+									"popWin", 
+									"left=300,top=200,width=300,height=200,marginwidth=0,marginheight=0,"+
+									"scrollbars=no,scrolling=no,menubar=no,resizable=no");
+}========================================	*/
+//==> 추가된부분 : "ID중복확인" Event 처리 및 연결
+ $(function() {
+	//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+	//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.	
+	 $("td.ct_btn:contains('ID중복확인')").on("click" , function() {
+		//alert($("td.ct_btn:contains('ID중복확인')").html());
+		popWin 
+		= window.open("/user/checkDuplication.jsp",
+									"popWin", 
+									"left=300,top=200,width=300,height=200,marginwidth=0,marginheight=0,"+
+									"scrollbars=no,scrolling=no,menubar=no,resizable=no");
+	});
+});	
 
 </script>
 </head>
