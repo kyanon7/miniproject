@@ -1,11 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
 <%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page pageEncoding="EUC-KR"%>
+
+<!DOCTYPE html>
 
 <html>
 <head>
 
-<title>열어본 상품 보기</title>
+	<title>열어본 상품 보기</title>
 
 </head>
 <body>

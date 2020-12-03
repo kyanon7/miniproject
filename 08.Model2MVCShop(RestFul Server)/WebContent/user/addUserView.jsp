@@ -48,7 +48,7 @@
 		if( pw != pw_confirm ) {
 			alert("비밀번호 확인이 일치하지 않습니다.");
 			//document.detailForm.password2.focus();
-			$("input:text[name='password2']").focus();
+			$("input[name='password2']").focus();
 			return;
 		}
 			
@@ -58,7 +58,7 @@
 		//	document.detailForm.phone.value = "";
 		//}
 		
-		var value = "";	
+		var value = "";
 		if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
 			var value = $("option:selected").val() + "-" 
 								+ $("input[name='phone2']").val() + "-" 
@@ -118,30 +118,24 @@
 		    return true;
 		}========================================	*/
 		//==> 추가된부분 : "이메일" 유효성Check  Event 처리 및 연결
-		 $(function() {
+		$(function() {
 			 
-			 $("input[name='email']").on("change" , function() {
+			$("input[name='email']").on("change" , function() {
 				
-				 var email=$("input[name='email']").val();
+				var email=$("input[name='email']").val();
 			    
-				 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+				if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
 			    	alert("이메일 형식이 아닙니다.");
-			     }
+			    }
 			});
-			 
-		});	
+			
+			//$("input[name='ssn']").change(function checkssn());
+			
+			$("select[name='phone1']").change(function() {
+				$("input[name='phone2']").focus();
+			});
+		});
 	
-/*
-function check_email(frm) {
-	alert
-	var email=document.detailForm.email.value;
-    if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)){
-    	alert("이메일 형식이 아닙니다.");
-		return false;
-    }
-    return true;
-}
-*/
 function checkSsn() {
 	var ssn1, ssn2; 
 	var nByear, nTyear; 
@@ -251,7 +245,8 @@ function fncCheckDuplication() {
 									<img src="/images/ct_btng01.gif" width="4" height="21"/>
 								</td>
 								<td align="center" background="/images/ct_btng02.gif" class="ct_btn" style="padding-top:3px;">
-									<a href="javascript:fncCheckDuplication();" id="btnCmfID">ID중복확인</a>
+									<!-- <a href="javascript:fncCheckDuplication();" id="btnCmfID">ID중복확인</a> -->
+									ID중복확인
 								</td>
 								<td width="4" height="21">
 									<img src="/images/ct_btng03.gif" width="4" height="21"/>
@@ -317,8 +312,7 @@ function fncCheckDuplication() {
 		<td width="104" class="ct_write">주민번호</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input 	type="text" name="ssn" class="ct_input_g" style="width:100px; height:19px" 
-							onChange="javascript:checkSsn();"  maxLength="13" />
+			<input 	type="text" name="ssn" class="ct_input_g" style="width:100px; height:19px" maxLength="13" onChange="javascript:checkSsn();" />
 			-제외, 13자리 입력
 		</td>
 	</tr>
@@ -344,8 +338,8 @@ function fncCheckDuplication() {
 		<td width="104" class="ct_write">휴대전화번호</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<select 	name="phone1" class="ct_input_g" style="width:50px; height:25px"
-							onChange="document.detailForm.phone2.focus();">
+			<select 	name="phone1" class="ct_input_g" style="width:50px; height:25px">
+							<!-- onChange="document.detailForm.phone2.focus();"> -->
 				<option value="010" >010</option>
 				<option value="011" >011</option>
 				<option value="016" >016</option>
@@ -372,8 +366,10 @@ function fncCheckDuplication() {
 			<table border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td height="26">
+						<!-- <input 	type="text" name="email" class="ct_input_g" 
+										style="width:100px; height:19px" onChange="check_email(this.form);" /> -->
 						<input 	type="text" name="email" class="ct_input_g" 
-										style="width:100px; height:19px" onChange="check_email(this.form);" />
+										style="width:100px; height:19px" />
 					</td>
 				</tr>
 			</table>
@@ -397,7 +393,7 @@ function fncCheckDuplication() {
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="javascript:fncAddUser();">가입</a>
+						<!-- <a href="javascript:fncAddUser();">가입</a> -->가입
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -407,7 +403,7 @@ function fncCheckDuplication() {
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="javascript:resetData();">취소</a>
+						<!-- <a href="javascript:resetData();">취소</a> -->취소
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
