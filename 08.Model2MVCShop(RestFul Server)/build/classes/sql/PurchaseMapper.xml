@@ -10,7 +10,7 @@
 	<resultMap id="purchaseSelectMap" type="com.model2.mvc.service.domain.Purchase">
 		<result property="tranNo"					column="tran_no"			jdbcType="NUMERIC" />
 		<result property="purchaseProd.prodNo"		column="prod_no"			jdbcType="NUMERIC" />
-		<result property="purchaseProd.prodName"	column="prod_name"			jdbcType="NUMERIC" />
+		<result property="purchaseProd.prodName"	column="prod_name"			jdbcType="VARCHAR" />
 		<result property="purchaseProd.price"		column="price"				jdbcType="NUMERIC" />
 		<result property="purchaseProd.regDate"		column="reg_date"			jdbcType="NUMERIC" />
 		<result property="buyer.userId"				column="buyer_id"			jdbcType="VARCHAR" />

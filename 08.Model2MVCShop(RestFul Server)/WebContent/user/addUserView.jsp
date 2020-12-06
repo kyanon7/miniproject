@@ -120,7 +120,20 @@
 		//==> 추가된부분 : "이메일" 유효성Check  Event 처리 및 연결
 		$(function() {
 			 
-			$("input[name='email']").on("change" , function() {
+			$("input:text[name='ssn']").change(function() {
+				var ssn1, ssn2; 
+				var nByear, nTyear; 
+				var today; 
+
+				ssn = document.detailForm.ssn.value;
+				// 유효한 주민번호 형식인 경우만 나이 계산 진행, PortalJuminCheck 함수는 CommonScript.js 의 공통 주민번호 체크 함수임 
+				if(!PortalJuminCheck(ssn)) {
+					alert("잘못된 주민번호입니다.");
+					return false;
+				}
+			});
+			
+			$("input[name='email']").on("change", function() {
 				
 				var email=$("input[name='email']").val();
 			    
@@ -135,7 +148,8 @@
 				$("input[name='phone2']").focus();
 			});
 		});
-	
+		
+/*
 function checkSsn() {
 	var ssn1, ssn2; 
 	var nByear, nTyear; 
@@ -147,7 +161,7 @@ function checkSsn() {
 		alert("잘못된 주민번호입니다.");
 		return false;
 	}
-}
+}*/
 
 function PortalJuminCheck(fieldValue){
     var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
@@ -312,7 +326,7 @@ function fncCheckDuplication() {
 		<td width="104" class="ct_write">주민번호</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input 	type="text" name="ssn" class="ct_input_g" style="width:100px; height:19px" maxLength="13" onChange="javascript:checkSsn();" />
+			<input 	type="text" name="ssn" class="ct_input_g" style="width:100px; height:19px" maxLength="13"/>
 			-제외, 13자리 입력
 		</td>
 	</tr>
