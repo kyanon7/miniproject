@@ -38,8 +38,25 @@
 				//alert("keyCode  : "+event.keyCode);
 				
 				if(event.keyCode == '13'){
-					//fncCheckDuplication();
+					$("td.ct_btn:contains('중복확인')").click();
 				}
+				
+			});
+			
+			$("td.ct_btn:contains('중복확인')").on("click" , function() {
+				
+				//==>Debug
+				//alert($("td.ct_btn:contains('중복확인')").html())
+				
+				// Form 유효성 검증
+				if( $("#userId").val() != null && $("#userId").val().length >0) {
+					$("form").attr("method" , "POST");
+				    $("form").attr("action" , "/user/checkDuplication");
+				    $("form").submit();
+				}else {
+					alert('아이디는 반드시 입력하셔야 합니다.');
+				}
+				$("#userId").focus();
 			});
 			
 		});
@@ -57,10 +74,10 @@
 			document.getElementById("userId").focus(); 
 		}========================================	*/
 		//==> "중복확인"  Event 처리
-		$(function() {
+		/*$(function() {
 			//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함.				
-			$("td.ct_btn:contains('중복확인')").on("click" , function() {
+			$("td.ct_btn:contains('중복확인')").on("click" , function checkDuplication() {
 				
 				//==>Debug
 				//alert($("td.ct_btn:contains('중복확인')").html())
@@ -75,7 +92,7 @@
 				}
 				$("#userId").focus();
 			});
-		});
+		});*/
 		
 		
 		/*=============jQuery 변경 주석처리 =============
