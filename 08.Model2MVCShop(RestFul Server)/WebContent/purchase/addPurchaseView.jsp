@@ -13,51 +13,77 @@
 %>
 --%>
 
+<!DOCTYPE html>
+
 <html>
 <head>
 
-<title>주문서</title>
-
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-
-<script type="text/javascript" src="../javascript/calendar.js"></script>
-
-<script type="text/javascript">
-
-function fncPurchase(){
-	//Form 유효성 검증
- 	var receiverName = document.detailForm.receiverName.value;
-	var receiverPhone = document.detailForm.receiverPhone.value;
-	var divyAddr = document.detailForm.divyAddr.value;
-	var divyDate = document.detailForm.divyDate.value;
-
-	if(receiverName == null || receiverName.length<1){
-		alert("구매자 이름은 반드시 입력하여야 합니다.");
-		return;
-	}
-	if(receiverPhone == null || receiverPhone.length<1){
-		alert("구매자 연락처는 반드시 입력하여야 합니다.");
-		return;
-	}
-	if(divyAddr == null || divyAddr.length<1){
-		alert("구매자 주소는 반드시 입력하셔야 합니다.");
-		return;
-	}
-	if(divyDate == null || divyDate.length<1){
-		alert("배송 희망일을 입력해주세요.");
-		return;
-	}
+	<title>주문서</title>
+	
+	<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<!-- CDN(Content Delivery Network) 호스트 사용 -->
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../javascript/calendar.js"></script>
+	<script type="text/javascript">
+	
+	function fncPurchase(){
+		//Form 유효성 검증
+	 	//var receiverName = document.detailForm.receiverName.value;
+		//var receiverPhone = document.detailForm.receiverPhone.value;
+		//var divyAddr = document.detailForm.divyAddr.value;
+		//var divyDate = document.detailForm.divyDate.value;
+	
+		var receiverName = $("input:text[name='receiverName']").val();
+		var receiverPhone = $("input:text[name='receiverPhone']").val();
+		var divyAddr = $("input:text[name='divyAddr']").val();
+		var divyDate = $("input:text[name='divyDate']").val();
 		
-	document.detailForm.action='/purchase/addPurchase';
-	document.detailForm.submit();
-}
+		if(receiverName == null || receiverName.length<1){
+			alert("구매자 이름은 반드시 입력하여야 합니다.");
+			return;
+		}
+		if(receiverPhone == null || receiverPhone.length<1){
+			alert("구매자 연락처는 반드시 입력하여야 합니다.");
+			return;
+		}
+		if(divyAddr == null || divyAddr.length<1){
+			alert("구매자 주소는 반드시 입력하셔야 합니다.");
+			return;
+		}
+		if(divyDate == null || divyDate.length<1){
+			alert("배송 희망일을 입력해주세요.");
+			return;
+		}
+		
+		//document.detailForm.action='/purchase/addPurchase';
+		//document.detailForm.submit();
+		$("form").attr("method", "POST").attr("action", "/purchase/addPurchase").submit();
+	}
+	
+	$(function() {
+		$("td.ct_btn01:contains('구매하기')").on("click", function(){
+			fncPurchase();
+		})
+	});
+	
+	$(function() {
+		$("td.ct_btn01:contains('취소')").on("click", function() {
+			history.go(-1);
+		})
+	});
+	
+	$(function() {
+		$("#cal").on("click", function(){
+			show_calendar('document.detailForm.divyDate', $("input:text[name='divyDate']").val());
+		})
+	});
 
-</script>
+	</script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
 
-<form name="detailForm" method="post">
+<form name="detailForm">
 
 <input type="hidden" id="purchaseProd.prodNo" name="purchaseProd.prodNo" value="${purchase.purchaseProd.prodNo}"/>
 <input type="hidden" id="buyer.userId" name="buyer.userId" value="${purchase.buyer.userId}"/>
@@ -217,10 +243,15 @@ function fncPurchase(){
 		<td width="104" class="ct_write">배송희망일자</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input type="text" readonly="readonly" name="divyDate" value="" 	
+			<!-- <input type="text" readonly="readonly" name="divyDate" value="" 	
 						class="ct_input_g" style="width: 100px; height: 25px" maxLength="10" minLength="6">
 						<img src="../images/ct_icon_date.gif" width="15" height="15" 
-									onclick="show_calendar('document.detailForm.divyDate', document.detailForm.divyDate.value)" />
+									onclick="show_calendar('document.detailForm.divyDate', document.detailForm.divyDate.value)" /> -->
+									
+			<input type="text" readonly="readonly" name="divyDate" value=""		
+						class="ct_input_g" style="width: 100px; height: 25px" maxLength="10" minLength="6">
+						<img src="../images/ct_icon_date.gif" width="15" height="15" id="cal"/>				
+									
 		</td>
 	</tr>
 	<tr>
@@ -238,7 +269,8 @@ function fncPurchase(){
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:fncPurchase();">구매하기</a>
+						<!-- <a href="javascript:fncPurchase();">구매하기</a> -->
+						구매하기
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -248,7 +280,8 @@ function fncPurchase(){
 						<img src="/images/ct_btnbg01.gif"width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:history.go(-1)">취소</a>
+						<!-- <a href="javascript:history.go(-1)">취소</a> -->
+						취소
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>

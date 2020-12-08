@@ -42,7 +42,17 @@
 		
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		$("#userId").focus();
-		 
+		
+		$(document).keydown(function(event) {
+			
+			//alert("keyCode  : "+event.keyCode);
+			
+			if(event.keyCode == '13'){
+				$("img[src='/images/btn_login.gif']").click();
+			}
+			
+		});
+		
 		//==> 추가된부분 : "Login"  Event 연결
 		$("img[src='/images/btn_login.gif']").on("click" , function() {
 
@@ -70,7 +80,6 @@
 			
 		});
 	});
-	
 	
 	//*=============jQuery 추가된부부분 : 회원원가입화면이동 =============
 	$( function() {

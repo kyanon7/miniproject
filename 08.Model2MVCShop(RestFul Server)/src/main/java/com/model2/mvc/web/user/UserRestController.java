@@ -150,7 +150,7 @@ public class UserRestController {
 	}
 	
 	@RequestMapping( value="json/listUser", method=RequestMethod.GET)
-	public Map<String, Object> listUser( @ModelAttribute("search") Search search, HttpServletRequest request) throws Exception{
+	public Map<String, Object> listUser( @ModelAttribute("search") Search search) throws Exception{
 		
 		System.out.println("/user/json/listUser : GET / POST");
 		
