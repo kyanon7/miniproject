@@ -1,22 +1,29 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  
 <!DOCTYPE html>
 
 <html>
-<head>
-<title>구매 목록 조회</title>
+	<head>
+		<meta charset="EUC-KR">
+		<title>구매 목록 조회</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<link rel="stylesheet" href="/css/admin.css" type="text/css">
 
-<script type="text/javascript">
-
-function fncGetList(currentPage){
-	document.getElementById("currentPage").value = currentPage;
-	document.detailForm.submit();
-}
+	<!-- CDN(Content Delivery Network) 호스트 사용 -->
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
+	/*
+	function fncGetList(currentPage){
+		document.getElementById("currentPage").value = currentPage;
+		document.detailForm.submit();
+	}*/
+	function fncGetList(currentPage){
+		$("#currentPage").val(currentPage);
+		$("form").attr("method", "POST").attr("action", "/purchase/listPurchase").submit();
+	}
 
 </script>
 </head>
@@ -107,27 +114,6 @@ function fncGetList(currentPage){
 	<tr>
 		<td align="center">
 			<input type="hidden" id="currentPage" name="currentPage" value="0"/>
-			<%--
-			<% if(resultPage.getCurrentPage() == 1){ %>
-					◀ 이전
-			<% }else{ %>
-					<a href="javascript:fncGetList('<%= resultPage.getCurrentPage()-1 %>')">◀ 이전</a>
-			<% } %>
-
-			<%	for(int i = resultPage.getBeginUnitPage(); i <= resultPage.getEndUnitPage(); i++){	%>
-					<% if(i == resultPage.getCurrentPage()){ %>
-						<strong><%= i %></strong>
-					<% }else{ %>
-						<a href="javascript:fncGetList('<%= i %>');"><%= i %></a>
-					<% } %>
-			<% 	}  %>
-	
-			<% if(resultPage.getEndUnitPage() >= resultPage.getMaxPage()){ %>
-					다음 ▶
-			<% }else{ %>
-					<a href="javascript:fncGetList('<%= resultPage.getEndUnitPage()+1 %>')">다음 ▶</a>
-			<% } %>
-			--%>
 			<jsp:include page="../common/pageNavigator.jsp"/>
     	</td>
 	</tr>

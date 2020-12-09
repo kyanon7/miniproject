@@ -30,14 +30,14 @@
 		$("td.ct_btn01:contains('수정')").on("click", function() {
 			location.href="/purchase/updatePurchase?tranNo=${purchase.tranNo}";
 		})
-	})
+	});
 	
-<!--
-function fncPurchase(){
-	document.detailForm.action='/purchase/updatePurchase';
-	document.detailForm.submit();
-}
--->
+	$(function() {
+		$("td.ct_btn01:contains('확인')").on("click", function() {
+			history.go(-1);
+		})
+	});
+	
 	</script>
 </head>
 
@@ -197,14 +197,15 @@ function fncPurchase(){
 						<img src="/images/ct_btnbg01.gif"width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<c:choose>
+						<!--<c:choose>
 							<c:when test="${sessionScope.user.role == 'user'}">
 								<a href="/purchase/listPurchase">확인</a>
 							</c:when>
 							<c:when test="${sessionScope.user.role == 'admin'}">
 								<a href="/purchase/listSale">확인</a>
 							</c:when>
-						</c:choose>
+						</c:choose> -->
+						확인
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
