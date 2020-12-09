@@ -1,24 +1,45 @@
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  
 <!DOCTYPE html>
 
 <html>
-<head>
-<title>판매 목록 조회</title>
+	<head>
+		<meta charset="EUC-KR">
+		<title>판매 목록 조회</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<link rel="stylesheet" href="/css/admin.css" type="text/css">
 
-<script type="text/javascript">
+	<!-- CDN(Content Delivery Network) 호스트 사용 -->
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript">
 
-function fncGetList(currentPage){
-	document.getElementById("currentPage").value = currentPage;
-	document.detailForm.submit();
-}
-
-</script>
+	/*
+	function fncGetList(currentPage){
+		document.getElementById("currentPage").value = currentPage;
+		document.detailForm.submit();
+	}
+	*/
+	
+	function fncGetList(currentPage){
+		$("#currentPage").val(currentPage);
+		$("form").attr("method", "POST").attr("action", "/purchase/listSale").submit();
+	}
+	
+	$(function() {
+		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
+			console.log($(this).find('div').text());
+			var tranNo = $(this).find('div').text().trim();
+			self.location ="/purchase/getPurchase?tranNo="+tranNo;
+		});
+		
+		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+		//$("h7").css("color" , "red");
+	})
+	
+	</script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
@@ -98,7 +119,11 @@ function fncGetList(currentPage){
 		<tr class="ct_list_pop">
 			<td align="center">${i}</td>
 			<td></td>
-			<td align="left"><a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${purchase.purchaseProd.prodName}</a></td>
+			<td align="left">
+			<!-- <a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${purchase.purchaseProd.prodName}</a></td> -->
+			${purchase.purchaseProd.prodName}
+			<div style="display:none">${purchase.tranNo}</div>
+			</td>
 			<td></td>
 			<td align="left">${purchase.purchaseProd.price}</td>
 			<td></td>

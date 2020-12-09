@@ -24,8 +24,20 @@
 		$("#currentPage").val(currentPage);
 		$("form").attr("method", "POST").attr("action", "/purchase/listPurchase").submit();
 	}
+	
+	$(function() {
+		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
+			console.log($(this).find('div').text());
+			var tranNo = $(this).find('div').text().trim();
+			self.location ="/purchase/getPurchase?tranNo="+tranNo;
+		});
+		
+		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+		//$("h7").css("color" , "red");
+	})
+	
 
-</script>
+	</script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
@@ -80,7 +92,11 @@
 		<tr class="ct_list_pop">
 			<td align="center">${i}</td>
 			<td></td>
-			<td align="left"><a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${purchase.buyer.userId}</a></td>
+			<td align="left">
+			<!-- <a href="/purchase/getPurchase?tranNo=${purchase.tranNo}">${purchase.buyer.userId}</a> -->
+			${purchase.buyer.userId}
+			<div style="display:none">${purchase.tranNo}</div>
+			</td>
 			<td></td>
 			<td align="left">${purchase.buyer.userName}</td>
 			<td></td>

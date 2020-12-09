@@ -1,26 +1,41 @@
-<%@ page import="com.model2.mvc.service.domain.Purchase"%>
-<%@ page contentType="text/html; charset=euc-kr" %>
+<%@ page contentType="text/html; charset=EUC-KR" %>
+<%@ page pageEncoding="EUC-KR"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
+<!DOCTYPE html>
 <html>
-<head>
+	<head>
+		<meta charset="EUC-KR">
+		<title>주문서</title>
 
-<title>주문서</title>
-
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
-
-<script type="text/javascript" src="../javascript/calendar.js"></script>
-
-<script type="text/javascript">
-
-function fncPurchase(){
-	document.detailForm.action='/purchase/listPurchase';
-	document.detailForm.submit();
-}
-
-</script>
+	<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	
+	<!-- CDN(Content Delivery Network) 호스트 사용 -->
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="../javascript/calendar.js"></script>
+	<script type="text/javascript">
+	
+	/*
+	function fncPurchase(){
+		document.detailForm.action='/purchase/listPurchase';
+		document.detailForm.submit();
+	}
+	*/
+	
+	$(function() {
+		$("td.ct_btn01:contains('확인')").on("click", function() {
+			$("form").attr("method", "POST").attr("action", "/purchase/listPurchase").submit();
+		})
+	});
+	
+	$(function() {
+		$("td.ct_btn01:contains('쇼핑 더 하기')").on("click", function() {
+			location.href="/product/listProduct?menu=search";
+		})
+	});
+	
+	</script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">
@@ -145,7 +160,8 @@ function fncPurchase(){
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:fncPurchase();">확인</a>
+						<!-- <a href="javascript:fncPurchase();">확인</a> -->
+						확인
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -155,7 +171,8 @@ function fncPurchase(){
 						<img src="/images/ct_btnbg01.gif"width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="/product/listProduct?menu=search">쇼핑 더 하기</a>
+						<!-- <a href="/product/listProduct?menu=search">쇼핑 더 하기</a> -->
+						쇼핑 더 하기
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>

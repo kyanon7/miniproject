@@ -1,4 +1,3 @@
-<%--@ page import="com.model2.mvc.service.domain.Purchase"--%>
 <%@ page contentType="text/html; charset=EUC-KR" %>
 <%@ page pageEncoding="EUC-KR"%>
 
@@ -7,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+	<meta charset="EUC-KR">
 	<title>
 	<c:choose>
 		<c:when test = "${sessionScope.user.role == 'user'}">
