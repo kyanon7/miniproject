@@ -21,7 +21,7 @@
 		</param-value>
 	</context-param>
 	
-	<context-param>  
+	<!-- <context-param>  
        <param-name>spring.profiles.active</param-name>  
        <param-value>dev</param-value>  
 	</context-param>  
@@ -32,7 +32,7 @@
 	<context-param>  
        <param-name>spring.liveBeansView.mbeanDomain</param-name>  
        <param-value>dev</param-value>  
-	</context-param>  
+	</context-param> -->  
 	
 	<!-- :: Spring API 에 제공하는 CharacterEncodingFilter 로 한글 인코딩처리 -->	
 	<filter>

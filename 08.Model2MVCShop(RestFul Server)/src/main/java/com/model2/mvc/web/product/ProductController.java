@@ -117,7 +117,7 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="listProduct")
-	public String listProduct( @ModelAttribute("search") Search search , Model model) throws Exception{
+	public String listProduct( @ModelAttribute("search") Search search , Model model, HttpServletRequest request) throws Exception{
 		
 		System.out.println("/product/listProduct : GET / POST");
 		
@@ -136,6 +136,8 @@ public class ProductController {
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("resultPage", resultPage);
 		model.addAttribute("search", search);
+		System.out.println(request.getAttribute("menu"));
+		request.setAttribute("menu", request.getAttribute("menu"));
 		
 		return "forward:/product/listProduct.jsp";
 	}

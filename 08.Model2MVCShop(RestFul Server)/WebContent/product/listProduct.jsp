@@ -48,7 +48,7 @@ function fncGetList(currentPage){
 }*/
 	function fncGetList(currentPage){
 		$("#currentPage").val(currentPage);
-		$("form").attr("method", "POST").attr("action", "/product/listProduct?menu="+"${param.menu}").submit();
+		$("form").attr("method", "POST").attr("action", "../product/listProduct").submit();
 	}
 	
 	//===========================================//
@@ -75,7 +75,7 @@ function fncGetList(currentPage){
 				//var prodNo = $(event.currentTarget).text().slice(cut+1).trim();
 				console.log($(this).find('div').text());
 				var prodNo = $(this).find('div').text().trim();
-				self.location ="/product/getProduct?prodNo="+prodNo+"&menu=${param.menu}";
+				location.href ="/product/getProduct?prodNo="+prodNo+"&menu=${param.menu}";
 		});
 		
 		//==> UI 수정 추가부분  :  userId LINK Event End User 에게 보일수 있도록 
@@ -102,7 +102,7 @@ function fncGetList(currentPage){
 
 <div style="width:98%; margin-left:10px;">
 
-<!-- <form name="detailForm" method="post"> -->
+<%-- <form name="detailForm" method="post"> --%>
 <form>
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
@@ -149,7 +149,7 @@ function fncGetList(currentPage){
 				<option value="2"  ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
 			</select>
 			<input type="text" name="searchKeyword"
-						value='${! empty search.searchKeyword ? search.searchKeyword : ""}' 
+						value="${! empty search.searchKeyword ? search.searchKeyword : ''}" 
 						class="ct_input_g" style="width:200px; height:19px" />
 		</td>
 		<td align="right" width="70">
