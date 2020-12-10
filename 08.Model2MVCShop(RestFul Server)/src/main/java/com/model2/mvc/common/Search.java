@@ -1,6 +1,7 @@
 package com.model2.mvc.common;
 
 
+
 //==>리스트화면을 모델링(추상화/캡슐화)한 Bean 
 public class Search {
 	

@@ -1,6 +1,7 @@
 package com.model2.mvc.common;
 
 
+
 //==> PageNavigation À» À§ÇÑ Bean
 public class Page {
 	

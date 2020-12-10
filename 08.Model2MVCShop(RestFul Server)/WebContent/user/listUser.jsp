@@ -31,7 +31,7 @@
 		//==> 검색 Event 연결처리부분
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함. 
-		 $( "td.ct_btn01:contains('검색')" ).on("click" , function() {
+		 $( "td.ct_btn01:contains('검색')" ).css("cursor","pointer").on("click" , function() {
 			//Debug..
 			//alert(  $( "td.ct_btn01:contains('검색')" ).html() );
 			fncGetList(1);
@@ -41,7 +41,7 @@
 		//==> userId LINK Event 연결처리
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 3 과 1 방법 조합 : $(".className tagName:filter함수") 사용함.
-		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
+		$( ".ct_list_pop td:nth-child(3)" ).css("cursor","pointer").on("click" , function() {
 				//Debug..
 				//alert(  $( this ).text().trim() );
 				self.location ="/user/getUser?userId="+$(this).text().trim();

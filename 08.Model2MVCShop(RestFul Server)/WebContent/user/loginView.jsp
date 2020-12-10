@@ -54,7 +54,7 @@
 		});
 		
 		//==> 추가된부분 : "Login"  Event 연결
-		$("img[src='/images/btn_login.gif']").on("click" , function() {
+		$("img[src='/images/btn_login.gif']").css("cursor","pointer").on("click" , function() {
 
 			var id=$("input:text").val();
 			var pw=$("input:password").val();
@@ -84,7 +84,7 @@
 	//*=============jQuery 추가된부부분 : 회원원가입화면이동 =============
 	$( function() {
 		//==> 추가된부분 : "addUser"  Event 연결
-		$("img[src='/images/btn_add.gif']").on("click" , function() {
+		$("img[src='/images/btn_add.gif']").css("cursor","pointer").on("click" , function() {
 			self.location = "/user/addUser"
 		});
 	});
