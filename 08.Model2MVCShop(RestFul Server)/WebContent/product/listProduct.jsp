@@ -36,7 +36,7 @@
 		</c:choose>
 	</title>
 
-<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<link rel="stylesheet" href="/css/admin.css" type="text/css">
 
 	<!-- CDN(Content Delivery Network) 호스트 사용 -->
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -48,7 +48,7 @@ function fncGetList(currentPage){
 }*/
 	function fncGetList(currentPage){
 		$("#currentPage").val(currentPage);
-		$("form").attr("method", "POST").attr("action", "../product/listProduct").submit();
+		$('form').attr("method", "POST").submit();
 	}
 	
 	//===========================================//
@@ -58,7 +58,7 @@ function fncGetList(currentPage){
 		//==> 검색 Event 연결처리부분
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 1 과 3 방법 조합 : $("tagName.className:filter함수") 사용함. 
-		 $( "td.ct_btn01:contains('검색')" ).on("click" , function() {
+		$( "td.ct_btn01:contains('검색')" ).on("click" , function() {
 			//Debug..
 			//alert(  $( "td.ct_btn01:contains('검색')" ).html() );
 			fncGetList(1);
@@ -69,13 +69,19 @@ function fncGetList(currentPage){
 		//==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 		//==> 3 과 1 방법 조합 : $(".className tagName:filter함수") 사용함.
 		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
-				//Debug..
-				//alert(  $( this ).text().trim() );
-				//var cut = $(this).text().lastIndexOf('/');
-				//var prodNo = $(event.currentTarget).text().slice(cut+1).trim();
-				console.log($(this).find('div').text());
-				var prodNo = $(this).find('div').text().trim();
-				location.href ="/product/getProduct?prodNo="+prodNo+"&menu=${param.menu}";
+			//Debug..
+			//alert(  $( this ).text().trim() );
+			//var cut = $(this).text().lastIndexOf('/');
+			//var prodNo = $(event.currentTarget).text().slice(cut+1).trim();
+			var prodNo = $(this).find('div').text().trim();
+			location.href ="/product/getProduct?prodNo="+prodNo+"&menu=${param.menu}";
+
+			if("${param.menu}" == "manage"){
+				console.log("${param.menu}");
+			}else if("${param.menu}" == "search"){
+				console.log("${param.menu}");
+            }
+			
 		});
 		
 		//==> UI 수정 추가부분  :  userId LINK Event End User 에게 보일수 있도록 
@@ -102,8 +108,7 @@ function fncGetList(currentPage){
 
 <div style="width:98%; margin-left:10px;">
 
-<%-- <form name="detailForm" method="post"> --%>
-<form>
+<form name="detailForm" method="post">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>

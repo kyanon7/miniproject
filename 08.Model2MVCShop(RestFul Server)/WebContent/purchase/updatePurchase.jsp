@@ -68,7 +68,7 @@
 		})
 	});
 
-</script>
+	</script>
 </head>
 
 <body bgcolor="#ffffff" text="#000000">

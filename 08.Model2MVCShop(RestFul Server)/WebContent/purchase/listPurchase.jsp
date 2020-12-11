@@ -26,10 +26,15 @@
 	}
 	
 	$(function() {
+		
+		$( "td.ct_btn01:contains('°Ë»ö')" ).on("click" , function() {
+			fncGetList(1);
+		});
+		
 		$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
 			console.log($(this).find('div').text());
 			var tranNo = $(this).find('div').text().trim();
-			self.location ="/purchase/getPurchase?tranNo="+tranNo;
+			location.href ="/purchase/getPurchase?tranNo="+tranNo;
 		});
 		
 		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
