@@ -1,202 +1,82 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
 	
-	<title>∑Œ±◊¿Œ »≠∏È</title>
+	<!-- Latest bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+			integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<!-- Optional theme -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	
-	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+	</style>
+	
 	<script type="text/javascript">
+		
+		$( function() {
+			$("button:contains('Login')").on("click" , function() {
 
-	/*
-		function fncLogin() {
-			var id=document.loginForm.userId.value;
-			var pw=document.loginForm.password.value;
-			if(id == null || id.length <1) {
-				alert('ID ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
-				document.loginForm.userId.focus();
-				return;
-			}
-			
-			if(pw == null || pw.length <1) {
-				alert('∆–Ω∫øˆµÂ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
-				document.loginForm.password.focus();
-				return;
-			}
-		    document.loginForm.submit();
-		}
-		
-		//Call Back Method ¿ÃøÎ onload Ω√ Event √≥∏Æ
-		window.onload = function(){
-			document.getElementById("userId").focus();
-		}
-	*/
-	
-	$( function() {
-		
-		//==> DOM Object GET 3∞°¡ˆ πÊπ˝ ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		$("#userId").focus();
-		
-		$(document).keydown(function(event) {
-			
-			//alert("keyCode  : "+event.keyCode);
-			
-			if(event.keyCode == '13'){
-				$("img[src='/images/btn_login.gif']").click();
-			}
-			
-		});
-		
-		//==> √ﬂ∞°µ»∫Œ∫– : "Login"  Event ø¨∞·
-		$("img[src='/images/btn_login.gif']").css("cursor","pointer").on("click" , function() {
+				var id=$("#userId").val();
+				var pw=$("#password").val();
 
-			var id=$("input:text").val();
-			var pw=$("input:password").val();
-			
-			if(id == null || id.length <1) {
-				alert('ID ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
-				$("input:text").focus();
-				return;
-			}
-			
-			if(pw == null || pw.length <1) {
-				alert('∆–Ω∫øˆµÂ∏¶ ¿‘∑¬«œ¡ˆ æ ¿∏ºÃΩ¿¥œ¥Ÿ.');
-				$("input:password").focus();
-				return;
-			}
-			
-			//$("form").attr("method" , "POST");
-			//$("form").attr("action" , "/login.do");
-			//$("form").attr("target" , "_parent");
-		    //$("form").submit();
-			//==> ¿ß¿« 4Ω««‡πÆ∞˙ ∞∞¿∫¿«πÃ			    
-			$("form").attr("method","POST").attr("action","/user/login").attr("target","_parent").submit();
-			
+				if(id == null || id.length <1) {
+					alert('ID Î•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
+					$("input:text").focus();
+					return;
+				}
+				
+				if(pw == null || pw.length <1) {
+					alert('Ìå®Ïä§ÏõåÎìúÎ•º ÏûÖÎ†•ÌïòÏßÄ ÏïäÏúºÏÖ®ÏäµÎãàÎã§.');
+					$("input:password").focus();
+					return;
+				}
+
+				$("form").attr("method","POST").attr("action","/user/login").submit();
+			});
 		});
-	});
-	
-	//*=============jQuery √ﬂ∞°µ»∫Œ∫Œ∫– : »∏ø¯ø¯∞°¿‘»≠∏È¿Ãµø =============
-	$( function() {
-		//==> √ﬂ∞°µ»∫Œ∫– : "addUser"  Event ø¨∞·
-		$("img[src='/images/btn_add.gif']").css("cursor","pointer").on("click" , function() {
-			self.location = "/user/addUser"
-		});
-	});
-	
+		
 	</script>
-
-</head>
-
-<body bgcolor="#ffffff" text="#000000" >
-
-<!-- ////////////////// jQuery Event √≥∏Æ∑Œ ∫Ø∞Êµ  /////////////////////////
- <form name="loginForm"  method="post" action="/user/login" target="_parent">
-////////////////////////////////////////////////////////////////////////////////////////////////// -->
-<form>
- 
-<div align="center">
-
-<TABLE WITH="100%" HEIGHT="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
-<TR>
-<TD ALIGN="CENTER" VALIGN="MIDDLE">
-
-<table width="650" height="390" border="5" cellpadding="0" cellspacing="0" bordercolor="#D6CDB7">
-  <tr> 
-    <td width="10" height="5" align="left" valign="top" bordercolor="#D6CDB7">
-    	<table width="650" height="390" border="0" cellpadding="0" cellspacing="0">
-        <tr>
-          <td width="305">
-            <img src="/images/logo-spring.png" width="305" height="390"/>
-          </td>
-          <td width="345" align="left" valign="top" background="/images/login02.gif">
-          	<table width="100%" height="220" border="0" cellpadding="0" cellspacing="0">
-              <tr> 
-                <td width="30" height="100">&nbsp;</td>
-                <td width="100" height="100">&nbsp;</td>
-                <td height="100">&nbsp;</td>
-                <td width="20" height="100">&nbsp;</td>
-              </tr>
-              <tr> 
-                <td width="30" height="50">&nbsp;</td>
-                <td width="100" height="50">
-                	<img src="/images/text_login.gif" width="91" height="32"/>
-                </td>
-                <td height="50">&nbsp;</td>
-                <td width="20" height="50">&nbsp;</td>
-              </tr>
-              <tr> 
-                <td width="200" height="50" colspan="4"></td>
-              </tr>              
-              <tr> 
-                <td width="30" height="30">&nbsp;</td>
-                <td width="100" height="30">
-                	<img src="/images/text_id.gif" width="100" height="30"/>
-                </td>
-                <td height="30">
-                  <input 	type="text" name="userId"  id="userId" class="ct_input_g" 
-                  				style="width:180px; height:19px"  maxLength='50'/>          
-          		</td>
-                <td width="20" height="30">&nbsp;</td>
-              </tr>
-              <tr> 
-                <td width="30" height="30">&nbsp;</td>
-                <td width="100" height="30">
-                	<img src="/images/text_pas.gif" width="100" height="30"/>
-                </td>
-                <td height="30">                    
-                    <input 	type="password" name="password" class="ct_input_g" 
-                    				style="width:180px; height:19px"  maxLength="50" />
-                </td>
-                <td width="20" height="30">&nbsp;</td>
-              </tr>
-              <tr> 
-                <td width="30" height="20">&nbsp;</td>
-                <td width="100" height="20">&nbsp;</td>
-                <td height="20" align="center">
-   				    <table width="136" height="20" border="0" cellpadding="0" cellspacing="0">
-                       <tr> 
-                         <td width="56">
-                         	<!-- ////////////////// jQuery Event √≥∏Æ∑Œ ∫Ø∞Êµ  /////////////////////////
-							<a href="javascript:fncLogin();">
-                         		<img src="/images/btn_login.gif" width="56" height="20" border="0"/>
-                         	</a>
-							////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                         		<img src="/images/btn_login.gif" width="56" height="20" border="0"/>
-                         </td>
-                         <td width="10">&nbsp;</td>
-                         <td width="70">
-                         	<!-- ////////////////// jQuery Event √≥∏Æ∑Œ ∫Ø∞Êµ  /////////////////////////
-							<a href="/user/addUser">
-                         		<img src="/images/btn_add.gif" width="70" height="20" border="0">
-                         	</a>
-							////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                       			<img src="/images/btn_add.gif" width="70" height="20" border="0">
-                         </td>
-                       </tr>
-                     </table>
-                 </td>
-                 <td width="20" height="20">&nbsp;</td>
-                </tr>
-              </table>
-            </td>
-      	</tr>                            
-      </table>
-      </td>
-  </tr>
-</table>
-</TD>
-</TR>
-</TABLE>
-
-</div>
-
-</form>
-
-</body>
+    
+    <!-- Custom styles for this template -->
+    <link href="../css/signin.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    
+	<main class="form-signin">
+		<form>
+			<a href="/index.jsp"><img class="mb-4" src="../images/bit-logo.svg" alt="" width="72" height="57"></a>
+			<h1 class="h3 mb-3 fw-normal">Î°úÍ∑∏Ïù∏</h1>
+			<label for="inputUserId" class="visually-hidden">Id</label>
+			<input type="text" id="userId" name="userId" class="form-control" placeholder="ÏïÑÏù¥Îîî" required autofocus>
+			<label for="inputPassword" class="visually-hidden">Password</label>
+			<input type="password" id="password" name="password" class="form-control" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏" required>
+			<button class="w-100 btn btn-lg btn-primary">Login</button>
+			<p class="mt-5 mb-3 text-muted">&copy; 1990-2020</p>
+		</form>
+	</main>
+  </body>
 </html>

@@ -1,123 +1,128 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-
-<html>
+<html lang="ko">
+	
 <head>
-	<meta charset="EUC-KR">
-	<title>È¸¿ø°¡ÀÔ</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>íšŒì›ê°€ì…</title>
+	
+	
+	<!-- Latest bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+			integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" 
+			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	
+	<link href="../css/signup.css" rel="stylesheet">
 
-	<!-- CDN(Content Delivery Network) È£½ºÆ® »ç¿ë -->
-	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<style>
+
+		.form-select-phone {
+			margin-top: 13px;
+			height: 49px !important;
+			display: inline-block;
+			width: 100%;
+			padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #212529;
+			vertical-align: middle;
+			background-color: #fff;
+			background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+			background-repeat: no-repeat;
+			background-position: right 0.75rem center;
+			background-size: 16px 12px;
+			border: 1px solid #ced4da;
+			border-radius: 0.25rem;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+		}
+
+		.form-control-phone {
+			margin-top: 13px;
+			height: 49px !important;
+			display: inline-block;
+			width: 39.35%;
+			padding: 0.375rem 0.75rem;
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 1.5;
+			color: #212529;
+			background-color: #fff;
+			background-clip: padding-box;
+			border: 1px solid #ced4da;
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			appearance: none;
+			border-radius: 0.25rem;
+			transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+		}
+	</style>
+
 	<script type="text/javascript">
 
-	//=====±âÁ¸Code ÁÖ¼® Ã³¸® ÈÄ  jQuery º¯°æ ======//
-	function fncAddUser() {
-		// Form À¯È¿¼º °ËÁõ
-		//var id=document.detailForm.userId.value;
-		//var pw=document.detailForm.password.value;
-		//var pw_confirm=document.detailForm.password2.value;
-		//var name=document.detailForm.userName.value;
-		
-		var id=$("input[name='userId']").val();
-		var pw=$("input[name='password']").val();
-		var pw_confirm=$("input[name='password2']").val();
-		var name=$("input[name='userName']").val();
-	
-		if(id == null || id.length <1){
-			alert("¾ÆÀÌµğ´Â ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-		if(pw == null || pw.length <1){
-			alert("ÆĞ½º¿öµå´Â  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-		if(pw_confirm == null || pw_confirm.length <1){
-			alert("ÆĞ½º¿öµå È®ÀÎÀº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-		if(name == null || name.length <1){
-			alert("ÀÌ¸§Àº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-			return;
-		}
-		
-		//if(document.detailForm.password.value != document.detailForm.password2.value) {
-		if( pw != pw_confirm ) {
-			alert("ºñ¹Ğ¹øÈ£ È®ÀÎÀÌ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
-			//document.detailForm.password2.focus();
-			$("input[name='password2']").focus();
-			return;
-		}
+		function fncAddUser() {
 			
-		//if(document.detailForm.phone2.value != "" && document.detailForm.phone2.value != "") {
-		//	document.detailForm.phone.value = document.detailForm.phone1.value + "-" + document.detailForm.phone2.value + "-" + document.detailForm.phone3.value;
-		//} else {
-		//	document.detailForm.phone.value = "";
-		//}
+			var id=$("input[name='userId']").val();
+			var pw=$("input[name='password']").val();
+			var pw_confirm=$("input[name='password2']").val();
+			var name=$("input[name='userName']").val();
 		
-		var value = "";
-		if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
-			var value = $("option:selected").val() + "-" 
-								+ $("input[name='phone2']").val() + "-" 
-								+ $("input[name='phone3']").val();
+			if(id == null || id.length <1){
+				alert("ì•„ì´ë””ëŠ” ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+				return;
+			}
+			if(pw == null || pw.length <1){
+				alert("íŒ¨ìŠ¤ì›Œë“œëŠ”  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+				return;
+			}
+			if(pw_confirm == null || pw_confirm.length <1){
+				alert("íŒ¨ìŠ¤ì›Œë“œ í™•ì¸ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+				return;
+			}
+			if(name == null || name.length <1){
+				alert("ì´ë¦„ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
+				return;
+			}
+			
+			if( pw != pw_confirm ) {
+				alert("ë¹„ë°€ë²ˆí˜¸ í™•ì¸ì´ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
+				$("input[name='password2']").focus();
+				return;
+			}
+			
+			var value = "";
+			if( $("input:text[name='phone2']").val() != ""  &&  $("input:text[name='phone3']").val() != "") {
+				var value = $("option:selected").val() + "-" 
+									+ $("input[name='phone2']").val() + "-" 
+									+ $("input[name='phone3']").val();
+			}
+			
+			$("input:hidden[name='phone']").val( value );
+			
+			$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
 		}
-		//Debug..
-		//alert("phone : "+value)
-		$("input:hidden[name='phone']").val( value );
 		
-		//document.detailForm.action='/user/addUser';
-		//document.detailForm.submit();
-		$("form").attr("method" , "POST").attr("action" , "/user/addUser").submit();
-	}
-		
-	//===========================================//
-	//==> Ãß°¡µÈºÎºĞ : "°¡ÀÔ"  Event ¿¬°á
-	 $(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-		 $( "td.ct_btn01:contains('°¡ÀÔ')" ).on("click" , function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('°¡ÀÔ')" ).html() );
-			fncAddUser();
-		});
-	});	
-		
-	/*============= jQuery º¯°æ ÁÖ¼®Ã³¸® =============
-		function resetData() {
-				document.detailForm.reset();
-		}========================================	*/
-		//==> Ãß°¡µÈºÎºĞ : "Ãë¼Ò"  Event Ã³¸® ¹×  ¿¬°á
 		$(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-			 $( "td.ct_btn01:contains('Ãë¼Ò')" ).on("click" , function() {
-					//Debug..
-					//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
+			$( "button:contains('ê°€ì… í™•ì¸')" ).on("click" , function() {
+				fncAddUser();
+			});
+		});	
+		
+		$(function() {
+			 $( "td.ct_btn01:contains('ì·¨ì†Œ')" ).on("click" , function() {
 					$("form")[0].reset();
 			});
 		});	
 	
-	
-		/////////////////////////////////////////////////////////////////////////////////
-		//document.detailForm.action='/addUser.do';
-		/////////////////////////////////////////////////////////////////////////////////
-		//document.detailForm.action='/user/addUser';
-		
-		//document.detailForm.submit();
-		
-	 /*============= jQuery º¯°æ ÁÖ¼®Ã³¸® =============
-		function check_email(frm) {
-			var email=document.detailForm.email.value;
-		    if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)){
-		    	alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
-				return false;
-		    }
-		    return true;
-		}========================================	*/
-		//==> Ãß°¡µÈºÎºĞ : "ÀÌ¸ŞÀÏ" À¯È¿¼ºCheck  Event Ã³¸® ¹× ¿¬°á
 		$(function() {
 			 
 			$("input:text[name='ssn']").change(function() {
@@ -126,9 +131,8 @@
 				var today; 
 
 				ssn = document.detailForm.ssn.value;
-				// À¯È¿ÇÑ ÁÖ¹Î¹øÈ£ Çü½ÄÀÎ °æ¿ì¸¸ ³ªÀÌ °è»ê ÁøÇà, PortalJuminCheck ÇÔ¼ö´Â CommonScript.js ÀÇ °øÅë ÁÖ¹Î¹øÈ£ Ã¼Å© ÇÔ¼öÀÓ 
 				if(!PortalJuminCheck(ssn)) {
-					alert("Àß¸øµÈ ÁÖ¹Î¹øÈ£ÀÔ´Ï´Ù.");
+					alert("ì˜ëª»ëœ ì£¼ë¯¼ë²ˆí˜¸ì…ë‹ˆë‹¤.");
 					return false;
 				}
 			});
@@ -138,297 +142,84 @@
 				var email=$("input[name='email']").val();
 			    
 				if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-			    	alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
+					alert("ì´ë©”ì¼ í˜•ì‹ì´ ì•„ë‹™ë‹ˆë‹¤.");
+					return false;
 			    }
 			});
-			
-			//$("input[name='ssn']").change(function checkssn());
 			
 			$("select[name='phone1']").change(function() {
 				$("input[name='phone2']").focus();
 			});
 		});
 		
-/*
-function checkSsn() {
-	var ssn1, ssn2; 
-	var nByear, nTyear; 
-	var today; 
 
-	ssn = document.detailForm.ssn.value;
-	// À¯È¿ÇÑ ÁÖ¹Î¹øÈ£ Çü½ÄÀÎ °æ¿ì¸¸ ³ªÀÌ °è»ê ÁøÇà, PortalJuminCheck ÇÔ¼ö´Â CommonScript.js ÀÇ °øÅë ÁÖ¹Î¹øÈ£ Ã¼Å© ÇÔ¼öÀÓ 
-	if(!PortalJuminCheck(ssn)) {
-		alert("Àß¸øµÈ ÁÖ¹Î¹øÈ£ÀÔ´Ï´Ù.");
-		return false;
-	}
-}*/
+		function PortalJuminCheck(fieldValue){
+			var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
+			var num = fieldValue;
+			if (!pattern.test(num)) return false; 
+			num = RegExp.$1 + RegExp.$2;
 
-function PortalJuminCheck(fieldValue){
-    var pattern = /^([0-9]{6})-?([0-9]{7})$/; 
-	var num = fieldValue;
-    if (!pattern.test(num)) return false; 
-    num = RegExp.$1 + RegExp.$2;
+			var sum = 0;
+			var last = num.charCodeAt(12) - 0x30;
+			var bases = "234567892345";
+			for (var i=0; i<12; i++) {
+				if (isNaN(num.substring(i,i+1))) return false;
+				sum += (num.charCodeAt(i) - 0x30) * (bases.charCodeAt(i) - 0x30);
+			}
+			var mod = sum % 11;
+			return ((11 - mod) % 10 == last) ? true : false;
+		}
 
-	var sum = 0;
-	var last = num.charCodeAt(12) - 0x30;
-	var bases = "234567892345";
-	for (var i=0; i<12; i++) {
-		if (isNaN(num.substring(i,i+1))) return false;
-		sum += (num.charCodeAt(i) - 0x30) * (bases.charCodeAt(i) - 0x30);
-	}
-	var mod = sum % 11;
-	return ((11 - mod) % 10 == last) ? true : false;
-}
-/*
-function resetData() {
-	document.detailForm.reset();
-}
-*/
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		$(function() {
+			$("td.ct_btn:contains('IDì¤‘ë³µí™•ì¸')").on("click" , function() {
+				popWin 
+				= window.open("/user/checkDuplication.jsp",
+											"popWin", 
+											"left=300,top=200,width=300,height=200,marginwidth=0,marginheight=0,"+
+											"scrollbars=no,scrolling=no,menubar=no,resizable=no");
+			});
+		});
 
-/*============= jQuery º¯°æ ÁÖ¼®Ã³¸® =============
-function fncCheckDuplication() {
-	popWin 
-		= window.open("/user/checkDuplication.jsp",
-									"popWin", 
-									"left=300,top=200,width=300,height=200,marginwidth=0,marginheight=0,"+
-									"scrollbars=no,scrolling=no,menubar=no,resizable=no");
-}========================================	*/
-//==> Ãß°¡µÈºÎºĞ : "IDÁßº¹È®ÀÎ" Event Ã³¸® ¹× ¿¬°á
- $(function() {
-	//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-	//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-	 $("td.ct_btn:contains('IDÁßº¹È®ÀÎ')").on("click" , function() {
-		//alert($("td.ct_btn:contains('IDÁßº¹È®ÀÎ')").html());
-		popWin 
-		= window.open("/user/checkDuplication.jsp",
-									"popWin", 
-									"left=300,top=200,width=300,height=200,marginwidth=0,marginheight=0,"+
-									"scrollbars=no,scrolling=no,menubar=no,resizable=no");
-	});
-});	
-
-</script>
+	</script>
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
-
-<form name="detailForm"  method="post" >
-
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37">
-			<img src="/images/ct_ttl_img01.gif" width="15" height="37"/>
-		</td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left:10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">È¸¿ø°¡ÀÔ</td>
-					<td width="20%" align="right">&nbsp;</td>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37">
-			<img src="/images/ct_ttl_img03.gif" width="12" height="37"/>
-		</td>
-	</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:13px;">
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">
-			¾ÆÀÌµğ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="105">
-						<input 	type="text" name="userId" class="ct_input_bg" 
-										style="width:100px; height:19px"  maxLength="20" >
-					</td>
-					<td>
-						<table border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td width="4" height="21">
-									<img src="/images/ct_btng01.gif" width="4" height="21"/>
-								</td>
-								<td align="center" background="/images/ct_btng02.gif" class="ct_btn" style="padding-top:3px;">
-									<!-- <a href="javascript:fncCheckDuplication();" id="btnCmfID">IDÁßº¹È®ÀÎ</a> -->
-									IDÁßº¹È®ÀÎ
-								</td>
-								<td width="4" height="21">
-									<img src="/images/ct_btng03.gif" width="4" height="21"/>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">
-			ºñ¹Ğ¹øÈ£ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="password" name="password" class="ct_input_g" 
-							style="width:100px; height:19px"  maxLength="10" minLength="6"  />
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">
-			ºñ¹Ğ¹øÈ£ È®ÀÎ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="password" name="password2" class="ct_input_g" 
-							style="width:100px; height:19px"  maxLength="10" minLength="6"  />
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">
-			ÀÌ¸§ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="text" name="userName" class="ct_input_g" 
-							style="width:100px; height:19px"  maxLength="50" />
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÁÖ¹Î¹øÈ£</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="text" name="ssn" class="ct_input_g" style="width:100px; height:19px" maxLength="13"/>
-			-Á¦¿Ü, 13ÀÚ¸® ÀÔ·Â
-		</td>
-	</tr>
-
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÁÖ¼Ò</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input		type="text" name="addr" class="ct_input_g" 
-						 	style="width:370px; height:19px"  maxLength="100"/>
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÈŞ´ëÀüÈ­¹øÈ£</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<select 	name="phone1" class="ct_input_g" style="width:50px; height:25px">
-							<!-- onChange="document.detailForm.phone2.focus();"> -->
-				<option value="010" >010</option>
-				<option value="011" >011</option>
-				<option value="016" >016</option>
-				<option value="018" >018</option>
-				<option value="019" >019</option>
-			</select>
-			<input 	type="text" name="phone2" class="ct_input_g" 
-							style="width:100px; height:19px"  maxLength="9" />
-			- 
-			<input 	type="text" name="phone3" class="ct_input_g" 
-							style="width:100px; height:19px"  maxLength="9" />
-			<input type="hidden" name="phone" class="ct_input_g"  />
-		</td>
-	</tr>
-
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÀÌ¸ŞÀÏ </td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td height="26">
-						<!-- <input 	type="text" name="email" class="ct_input_g" 
-										style="width:100px; height:19px" onChange="check_email(this.form);" /> -->
-						<input 	type="text" name="email" class="ct_input_g" 
-										style="width:100px; height:19px" />
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top:10px;">
-	<tr>
-		<td width="53%">	</td>
-
-		<td align="right">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:fncAddUser();">°¡ÀÔ</a> -->°¡ÀÔ
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-					<td width="30"></td>					
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:resetData();">Ãë¼Ò</a> -->Ãë¼Ò
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-
-</form>
-
+	<div class="container mt-5">
+		<form name="detailForm" method="post">
+			<div class="row d-flex justify-content-center">
+				<div class="col-md-6">
+					<div class="card p-4 py-5">
+						<p class="h2">íšŒì›ê°€ì…</hp>
+						<div class="d-flex flex-row">
+							<span class="mr-2">ì´ë¯¸ ì•„ì´ë””ê°€ ìˆìœ¼ì‹œë‹¤ë©´?&nbsp;</span> 
+							<a href="loginView.jsp" class="signin-link">ì—¬ê¸°ë¥¼ ëˆŒëŸ¬ ë¡œê·¸ì¸</a>
+						</div>
+						<div class="signup mt-3"> 
+							<input type="text" name="userId" class="form-control" placeholder="ì•„ì´ë””" required autofocus> 
+							<input type="password" name="password" class="form-control" placeholder="ë¹„ë°€ë²ˆí˜¸" required> 
+							<input type="password" name="password2" class="form-control" placeholder="ë¹„ë°€ë²ˆí˜¸ í™•ì¸" required>
+							<input type="text" name="userName" class="form-control" placeholder="ì´ë¦„" required>
+							<input type="text" name="ssn" class="form-control" placeholder="ì£¼ë¯¼ë²ˆí˜¸ -ì œì™¸, 13ìë¦¬ ì…ë ¥">
+							<input type="text" name="addr" class="form-control" placeholder="ì£¼ì†Œ">
+							<input type="text" name="email" class="form-control" placeholder="ì´ë©”ì¼">
+								<select name="phone1" class="form-select-phone form-select-lg mb-3" style="width: 100px; height: 25px;">
+									<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
+									<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
+									<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
+									<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
+									<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
+								</select>-
+								<input type="text" name="phone2" class="form-control-phone" placeholder="íœ´ëŒ€ì „í™”ë²ˆí˜¸">-
+								<input type="text" name="phone3" class="form-control-phone" placeholder="-ì œì™¸ ì…ë ¥">
+								<input type="hidden" name="phone"/>
+						</div>
+						<div class="mt-2">
+							<button class="w-100 btn btn-lg btn-primary">ê°€ì… í™•ì¸</button>
+						</div>
+						<div class="mt-2"><p class="text-center"><a href="../index.jsp" class="primary">ëŒì•„ê°€ê¸°</a></p></div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
 </body>
 </html>

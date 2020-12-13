@@ -1,127 +1,128 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
-<!-- ToolBar Start /////////////////////////////////////-->
-<div class="navbar  navbar-inverse navbar-fixed-top">
+<script type="text/javascript">
 	
-	<div class="container">
-	       
-		<a class="navbar-brand" href="/index.jsp">Model2 MVC Shop</a>
-		
-		<!-- toolBar Button Start //////////////////////// -->
-		<div class="navbar-header">
-		    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
-		        <span class="sr-only">Toggle navigation</span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		        <span class="icon-bar"></span>
-		    </button>
-		</div>
-		<!-- toolBar Button End //////////////////////// -->
-		
-	    <!--  dropdown hover Start -->
-		<div 	class="collapse navbar-collapse" id="target" 
-	       			data-hover="dropdown" data-animations="fadeInDownNew fadeInRightNew fadeInUpNew fadeInLeftNew">
-	         
-	         	<!-- Tool Bar ¸¦ ´Ù¾çÇÏ°Ô »ç¿ëÇÏ¸é.... -->
-	             <ul class="nav navbar-nav">
-	             
-	              <!--  È¸¿ø°ü¸® DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >È¸¿ø°ü¸®</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">°³ÀÎÁ¤º¸Á¶È¸</a></li>
-	                         
-	                         <c:if test="${sessionScope.user.role == 'admin'}">
-	                         	<li><a href="#">È¸¿øÁ¤º¸Á¶È¸</a></li>
-	                         </c:if>
-	                         
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc...</a></li>
-	                     </ul>
-	                 </li>
-	                 
-	              <!-- ÆÇ¸Å»óÇ°°ü¸® DrowDown  -->
-	               <c:if test="${sessionScope.user.role == 'admin'}">
-		              <li class="dropdown">
-		                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-		                         <span >ÆÇ¸Å»óÇ°°ü¸®</span>
-		                         <span class="caret"></span>
-		                     </a>
-		                     <ul class="dropdown-menu">
-		                         <li><a href="#">ÆÇ¸Å»óÇ°µî·Ï</a></li>
-		                         <li><a href="#">ÆÇ¸Å»óÇ°°ü¸®</a></li>
-		                         <li class="divider"></li>
-		                         <li><a href="#">etc..</a></li>
-		                     </ul>
-		                </li>
-	                 </c:if>
-	                 
-	              <!-- ±¸¸Å°ü¸® DrowDown -->
-	              <li class="dropdown">
-	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-	                         <span >»óÇ°±¸¸Å</span>
-	                         <span class="caret"></span>
-	                     </a>
-	                     <ul class="dropdown-menu">
-	                         <li><a href="#">»ó Ç° °Ë »ö</a></li>
-	                         
-	                         <c:if test="${sessionScope.user.role == 'user'}">
-	                           <li><a href="#">±¸¸ÅÀÌ·ÂÁ¶È¸</a></li>
-	                         </c:if>
-	                         
-	                         <li><a href="#">ÃÖ±Ùº»»óÇ°</a></li>
-	                         <li class="divider"></li>
-	                         <li><a href="#">etc..</a></li>
-	                     </ul>
-	                 </li>
-	                 
-	                 <li><a href="#">etc...</a></li>
-	             </ul>
-	             
-	             <ul class="nav navbar-nav navbar-right">
-	                <li><a href="#">·Î±×¾Æ¿ô</a></li>
-	            </ul>
-		</div>
-		<!-- dropdown hover END -->	       
-	    
-	</div>
-</div>
-		<!-- ToolBar End /////////////////////////////////////-->
- 	
-   	
-   	
-   	<script type="text/javascript">
+	//============= logout Event  ì²˜ë¦¬ =============
+	$(function() {
+		$( "a:contains('íšŒì›ì •ë³´ì¡°íšŒ')" ).on("click" , function() {
+			$(self.location).attr("href", "/user/listUser");
+		}); 
 	
-		//============= logout Event  Ã³¸® =============	
-		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains('·Î±×¾Æ¿ô')").on("click" , function() {
-				$(self.location).attr("href","/user/logout");
-				//self.location = "/user/logout"
-			}); 
-		 });
-		
-		//============= È¸¿øÁ¤º¸Á¶È¸ Event  Ã³¸® =============	
-		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		 	$("a:contains('È¸¿øÁ¤º¸Á¶È¸')").on("click" , function() {
-				//$(self.location).attr("href","/user/logout");
-				self.location = "/user/listUser"
-			}); 
-		 });
-		
-		//=============  °³ÀÎÁ¤º¸Á¶È¸È¸ Event  Ã³¸® =============	
-	 	$( "a:contains('°³ÀÎÁ¤º¸Á¶È¸')" ).on("click" , function() {
-	 		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+		$( "a:contains('ê°œì¸ì •ë³´ì¡°íšŒ')" ).on("click" , function() {
 			$(self.location).attr("href","/user/getUser?userId=${sessionScope.user.userId}");
 		});
-		
-	</script>  
+
+		$( "a:contains('íŒë§¤ìƒí’ˆë“±ë¡')" ).on("click" , function() {
+			$(self.location).attr("href","../product/addProductView.jsp");
+		});
+
+		$( "a:contains('íŒë§¤ìƒí’ˆê²€ìƒ‰')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=manage");
+		});
+
+		$( "a:contains('ìƒí’ˆê²€ìƒ‰')" ).on("click" , function() {
+			$(self.location).attr("href","/product/listProduct?menu=search");
+		});
+
+		$( "a:contains('êµ¬ë§¤ì´ë ¥ì¡°íšŒ')" ).on("click" , function() {
+			$(self.location).attr("href","/purchase/listPurchase");
+		});
+
+		$( "a:contains('íŒë§¤ì´ë ¥ì¡°íšŒ')" ).on("click" , function() {
+			$(self.location).attr("href","/purchase/listSale");
+		});
+
+		$( "a[href='#' ]:contains('ìµœê·¼ ë³¸ ìƒí’ˆ')" ).on("click" , function() {
+			popWin = window.open("/history.jsp","popWin","left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+		});
+
+		$( "a:contains('ë¡œê·¸ì•„ì›ƒ')" ).on("click" , function() {
+			$(self.location).attr("href","/user/logout");
+		});
+	});
+	
+</script>
+
+<!-- ToolBar Start /////////////////////////////////////-->
+	   
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color:#8CABD9;">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/index.jsp">
+			<img class="img" src="/images/bit-logo.svg" style="background-color: #ffffff;">&nbsp; Model2 MVC Shop</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+				data-bs-target="#navbarColor03" aria-controls="navbarColor03" 
+				aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span></button>
+
+		<div class="collapse navbar-collapse" id="navbarColor03">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				
+				<div class="dropdown">
+					<a class="btn dropdown-toggle" href="#" role="button" 
+					id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+						íšŒì›ê´€ë¦¬</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<c:if test="${ !empty user }">
+							<li><a class="dropdown-item" href="#">ê°œì¸ì •ë³´ì¡°íšŒ</a></li>
+						</c:if>
+						<c:if test="${ !empty user && user.role == 'admin' }">
+							<li><a class="dropdown-item" href="#">íšŒì›ì •ë³´ì¡°íšŒ</a></li>
+						</c:if>
+					</ul>
+				</div>
+				
+				<c:if test="${user.role == 'admin'}">
+					<div class="dropdown">
+						<a class="btn dropdown-toggle" href="#" role="button" 
+						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+							íŒë§¤ìƒí’ˆê´€ë¦¬</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+							<li><a class="dropdown-item" href="#">íŒë§¤ìƒí’ˆë“±ë¡</a></li>
+							<li><a class="dropdown-item" href="#">íŒë§¤ìƒí’ˆê²€ìƒ‰</a></li>
+						</ul>
+					</div>
+				</c:if>
+
+				<div class="dropdown">
+					<a class="btn dropdown-toggle" href="#" role="button" 
+					id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+						ìƒí’ˆêµ¬ë§¤</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						<c:choose>
+							<c:when test="${ !empty user && user.role == 'user' }">
+								<li><a class="dropdown-item" href="#">êµ¬ë§¤ì´ë ¥ì¡°íšŒ</a></li>
+							</c:when>
+							<c:when test="${ !empty user && user.role == 'admin' }">
+							<li><a class="dropdown-item" href="#">íŒë§¤ì´ë ¥ì¡°íšŒ</a></li>
+							</c:when>
+						</c:choose>
+						<li>
+							<a class="dropdown-item" href="#">ìƒí’ˆê²€ìƒ‰</a>
+						</li>
+					</ul>
+				</div>
+
+				<div>
+					<li class="nav-item">
+						<a class="nav-link" href="#">ìµœê·¼ ë³¸ ìƒí’ˆ</a>
+					</li>
+				</div>
+			</ul>
+		</div>
+
+		<div class="collapse navbar-collapse" id="navbarColor03">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" href="#">ë¡œê·¸ì•„ì›ƒ</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<!-- ToolBar End /////////////////////////////////////-->

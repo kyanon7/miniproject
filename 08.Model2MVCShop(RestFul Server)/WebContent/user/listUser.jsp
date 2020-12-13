@@ -1,81 +1,56 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
-
 <html lang="ko">
 
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>íšŒì› ëª©ë¡ ì¡°íšŒ</title>
 	
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   ÂüÁ¶ -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	
-	<title>È¸¿ø ¸ñ·Ï Á¶È¸</title>
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
-			integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<!-- Latest bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+			integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" 
-			integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" 
 			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" 
-			integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-	
-	<!-- Bootstrap Dropdown Hover CSS -->
-	<link href="/css/animate.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-	<!-- Bootstrap Dropdown Hover JS -->
-	<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
-
-	<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" 
-			integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
-
-
-	<style>
-		body {
-				padding-top : 50px;
-		}
-	</style>
 
 	<script type="text/javascript">
 
-	// °Ë»ö / page µÎ°¡Áö °æ¿ì ¸ğµÎ Form Àü¼ÛÀ» À§ÇØ JavaScrpt ÀÌ¿ë  
+	// ê²€ìƒ‰ / page ë‘ê°€ì§€ ê²½ìš° ëª¨ë‘ Form ì „ì†¡ì„ ìœ„í•´ JavaScrpt ì´ìš©  
 	function fncGetList(currentPage) {
 		$("#currentPage").val(currentPage);
 	   	$("form").attr("method", "POST").attr("action", "/user/listUser").submit();
 	}
 	
 	//===========================================//
-	//==> Ãß°¡µÈºÎºĞ : "°Ë»ö" ,  userId link  Event ¿¬°á ¹× Ã³¸®
+	//==> ì¶”ê°€ëœë¶€ë¶„ : "ê²€ìƒ‰" ,  userId link  Event ì—°ê²° ë° ì²˜ë¦¬
 	$(function() {
-		$( "button.btn.btn-default" ).on("click" , function() {
+		$( "button.btn.btn-primary" ).on("click" , function() {
 			fncGetList(1);
 		});
 	});
 	
-	//============= userId ¿¡ È¸¿øÁ¤º¸º¸±â  Event  Ã³¸®(Click) =============	
+	//============= userId ì— íšŒì›ì •ë³´ë³´ê¸°  Event  ì²˜ë¦¬(Click) =============	
 	$(function() {
 	
 		$( "td:nth-child(2)" ).css("cursor","pointer").on("click" , function() {
 			location.href ="/user/getUser?userId="+$(this).text().trim();
 		});
 					
-		//==> userId LINK Event End User ¿¡°Ô º¸ÀÏ¼ö ÀÖµµ·Ï 
+		//==> userId LINK Event End User ì—ê²Œ ë³´ì¼ìˆ˜ ìˆë„ë¡ 
 		$( "td:nth-child(2)" ).css("color" , "red");
 	
 	});	
 		
 	$(function() {
 			 
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			//==> DOM Object GET 3ê°€ì§€ ë°©ë²• ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
 			$(  "td:nth-child(5) > i" ).on("click" , function() {
  
 				var userId = $(this).next().val();
@@ -92,11 +67,11 @@
 								success : function(JSONData , status) {
  
 									var displayValue = "<h6>"
-																+"¾ÆÀÌµğ : "+JSONData.userId+"<br/>"
-																+"ÀÌ  ¸§ : "+JSONData.userName+"<br/>"
-																+"ÀÌ¸ŞÀÏ : "+JSONData.email+"<br/>"
+																+"ì•„ì´ë”” : "+JSONData.userId+"<br/>"
+																+"ì´  ë¦„ : "+JSONData.userName+"<br/>"
+																+"ì´ë©”ì¼ : "+JSONData.email+"<br/>"
 																+"ROLE : "+JSONData.role+"<br/>"
-																+"µî·ÏÀÏ : "+JSONData.regDate+"<br/>"
+																+"ë“±ë¡ì¼ : "+JSONData.regDate+"<br/>"
 																+"</h6>";
 									$("h6").remove();
 									$( "#"+userId+"" ).html(displayValue);
@@ -106,11 +81,11 @@
 					 
 			});
 
-		//==> userId LINK Event End User ¿¡°Ô º¸ÀÏ¼ö ÀÖµµ·Ï 
+		//==> userId LINK Event End User ì—ê²Œ ë³´ì¼ìˆ˜ ìˆë„ë¡ 
 		$( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
 		$("h7").css("color" , "red");
 		
-		//==> ¾Æ·¡¿Í °°ÀÌ Á¤ÀÇÇÑ ÀÌÀ¯´Â ??
+		//==> ì•„ë˜ì™€ ê°™ì´ ì •ì˜í•œ ì´ìœ ëŠ” ??
 		$(".ct_list_pop:nth-child(4n+6)" ).css("background-color" , "whitesmoke");
 	});
 
@@ -122,61 +97,55 @@
 
 	<jsp:include page="/layout/toolbar.jsp" />
 
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
+	<form name="detailForm" method="POST">
 	<div class="container">
 
-		<div class="page-header text-info">
-			<h3>È¸¿ø¸ñ·ÏÁ¶È¸</h3>
+		<div class="h3 mt-4">
+			íšŒì›ëª©ë¡ì¡°íšŒ
 		</div>
 		
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
 		<div class="row">
-		
-			<div class="col-md-6 text-left">
-				<p class="text-primary">
-					ÀüÃ¼  ${resultPage.totalCount } °Ç¼ö, ÇöÀç ${resultPage.currentPage}  ÆäÀÌÁö
-				</p>
-			</div>
-			
-			<div class="col-md-6 text-right">
-				<form class="form-inline" name="detailForm">
-				
-					<div class="form-group">
-					<select class="form-control" name="searchCondition" >
-						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition == 0 ? "selected" : "" }>È¸¿øID</option>
-						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition == 1 ? "selected" : "" }>È¸¿ø¸í</option>
-					</select>
-					</div>
-					
-					<div class="form-group">
-					<label class="sr-only" for="searchKeyword">°Ë»ö¾î</label>
-					<input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="°Ë»ö¾î"
-									value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
-					</div>
-					
-					<button type="button" class="btn btn-default">°Ë»ö</button>
-					
-					<!-- PageNavigation ¼±ÅÃ ÆäÀÌÁö °ªÀ» º¸³»´Â ºÎºĞ -->
-					<input type="hidden" id="currentPage" name="currentPage" value="0"/>
-					
-				</form>
-			</div>
+			<p class="text-primary">
+				ì „ì²´  ${resultPage.totalCount } ê±´ìˆ˜, í˜„ì¬ ${resultPage.currentPage}  í˜ì´ì§€
+			</p>
 			
 		</div>
-		<!-- table À§ÂÊ °Ë»ö Start /////////////////////////////////////-->
+
+		<div class="container">
+			<div class="row justify-content-end">
+			  	<div class="col-2">
+					<select class="form-select" name="searchCondition">
+						<option value="0"  ${ ! empty search.searchCondition && search.searchCondition == 0 ? "selected" : "" }>íšŒì›ID</option>
+						<option value="1"  ${ ! empty search.searchCondition && search.searchCondition == 1 ? "selected" : "" }>íšŒì›ëª…</option>
+					</select>
+				</div>
+
+			  	<div class="col-4">
+					<label class="visually-hidden" for="searchKeyword">ê²€ìƒ‰ì–´</label>
+						<div class="input-group">
+							<input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="ê²€ìƒ‰ì–´"
+							value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+						</div>
+				  </div>
+				  
+				<div class="col-1">
+					<button type="button" class="btn btn-primary">ê²€ìƒ‰</button>
+				</div>
+			</div>
+		</div>
 		
-		
+
+		<input type="hidden" id="currentPage" name="currentPage" value="0"/>
+
 		<!--  table Start /////////////////////////////////////-->
 		<table class="table table-hover table-striped" >
 		
 		<thead>
-			<tr>
 			<th align="center">No</th>
-			<th align="left">È¸¿ø ID</th>
-			<th align="left">È¸¿ø¸í</th>
-			<th align="left">ÀÌ¸ŞÀÏ</th>
-			<th align="left">°£·«Á¤º¸</th>
-			</tr>
+			<th align="left">íšŒì› ID</th>
+			<th align="left">íšŒì›ëª…</th>
+			<th align="left">ì´ë©”ì¼</th>
+			<!-- <th align="left">ê°„ëµì •ë³´</th> -->
 		</thead>
 		
 		<tbody>
@@ -185,12 +154,12 @@
 			<c:forEach var="user" items="${list}">
 			<c:set var="i" value="${ i+1 }" />
 			<tr>
-				<td align="center">${ i }</td>
-				<td align="left"  title="Click : È¸¿øÁ¤º¸ È®ÀÎ">${user.userId}</td>
+				<td align="left">${ i }</td>
+				<td align="left"  title="Click : íšŒì›ì •ë³´ í™•ì¸">${user.userId}</td>
 				<td align="left">${user.userName}</td>
 				<td align="left">${user.email}</td>
 				<td align="left">
-					<i class="glyphicon glyphicon-ok" id= "${user.userId}"></i>
+					<!-- <svg class="bi bi-chevron-right" width="22" height="22" viewBox="0 0 20 20" id="${user.userId}" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6.646 3.646a.5.5 0 01.708 0l6 6a.5.5 0 010 .708l-6 6a.5.5 0 01-.708-.708L12.293 10 6.646 4.354a.5.5 0 010-.708z"/></svg> -->
 					<input type="hidden" value="${user.userId}">
 				</td>
 			</tr>
@@ -198,16 +167,14 @@
 		
 		</tbody>
 		
+		
+
 		</table>
-		<!--  table End /////////////////////////////////////-->
 		
 		</div>
-		<!--  È­¸é±¸¼º div End /////////////////////////////////////-->
 		
 		
-		<!-- PageNavigation Start... -->
 	<jsp:include page="../common/pageNavigator_new.jsp"/>
-	<!-- PageNavigation End... -->
 	
 </body>
 

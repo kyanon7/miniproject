@@ -1,37 +1,34 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-
-<html>
+<html lang="ko">
+	
 <head>
-	<meta charset="EUC-KR">
-	<title>È¸¿ø Á¤º¸ ¼öÁ¤</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>íšŒì› ì •ë³´ ìˆ˜ì •</title>
 	
-	<link rel="stylesheet" href="/css/admin.css" type="text/css">
+	<!-- Latest bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+			integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 	
-	<!-- CDN(Content Delivery Network) È£½ºÆ® »ç¿ë -->
-	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+   	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 
-	//=====±âÁ¸Code ÁÖ¼® Ã³¸® ÈÄ  jQuery º¯°æ ======//
 	function fncUpdateUser() {
-		// Form À¯È¿¼º °ËÁõ
-		//var name=document.detailForm.userName.value;
 		var name=$("input[name='userName']").val();
 		
 		if(name == null || name.length <1){
-			alert("ÀÌ¸§Àº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
+			alert("ì´ë¦„ì€  ë°˜ë“œì‹œ ì…ë ¥í•˜ì…”ì•¼ í•©ë‹ˆë‹¤.");
 			return;
 		}
-			
-		//if(document.detailForm.phone2.value != "" && document.detailForm.phone2.value != "") {
-		//	document.detailForm.phone.value = document.detailForm.phone1.value + "-" + document.detailForm.phone2.value + "-" + document.detailForm.phone3.value;
-		//} else {
-		//	document.detailForm.phone.value = "";
-		//}
 		
 		var value = "";	
 		if( $("input[name='phone2']").val() != ""  &&  $("input[name='phone3']").val() != "") {
@@ -40,255 +37,100 @@
 								+ $("input[name='phone3']").val();
 		}
 		
-		//Debug...
-		//alert("phone : "+value);
 		$("input:hidden[name='phone']").val( value );
-			
-		//	document.detailForm.action='/user/updateUser';
-		//document.detailForm.submit();
-		$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
-	}//===========================================//
-	//==> Ãß°¡µÈºÎºĞ : "¼öÁ¤"  Event ¿¬°á
-	 $(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-		 $( "td.ct_btn01:contains('¼öÁ¤')" ).on("click" , function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('¼öÁ¤')" ).html() );
-			fncUpdateUser();
-		});
-	});	
-	
-
-	 /*============= jQuery º¯°æ ÁÖ¼®Ã³¸® =============
-	function check_email(frm) {
-			var email=document.detailForm.email.value;
-		    if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)){
-		    	alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
-				return false;
-		    }
-		    return true;
-	}========================================	*/
-	//==> Ãß°¡µÈºÎºĞ : "ÀÌ¸ŞÀÏ" À¯È¿¼ºCheck  Event Ã³¸® ¹× ¿¬°á
-	 $(function() {
-		 
-		 $("input[name='email']").on("change" , function() {
-				
-			 var email=$("input[name='email']").val();
-		    
-			 if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
-		    	alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
-		     }
-		});
-		 
-	});	
-	
-	
- 	/*============= jQuery º¯°æ ÁÖ¼®Ã³¸® =============
-	function resetData() {
-		document.detailForm.reset();
-	}========================================	*/
-	//==> Ãß°¡µÈºÎºĞ : "Ãë¼Ò"  Event ¿¬°á ¹× Ã³¸®
-	 $(function() {
-		//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-		//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-		 $( "td.ct_btn01:contains('Ãë¼Ò')" ).on("click" , function() {
-			//Debug..
-			//alert(  $( "td.ct_btn01:contains('Ãë¼Ò')" ).html() );
-			history.go(-1);
-		});
-	});
-	
-/*	
-function fncUpdateUser() {
-	// Form À¯È¿¼º °ËÁõ
-	var name=document.detailForm.userName.value;
-	
-	if(name == null || name.length <1){
-		alert("ÀÌ¸§Àº  ¹İµå½Ã ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.");
-		return;
-	}
 		
-	if(document.detailForm.phone2.value != "" && document.detailForm.phone2.value != "") {
-		document.detailForm.phone.value = document.detailForm.phone1.value + "-" + document.detailForm.phone2.value + "-" + document.detailForm.phone3.value;
-	} else {
-		document.detailForm.phone.value = "";
+		$("form").attr("method" , "POST").attr("action" , "/user/updateUser").submit();
 	}
-	
-	////////////////////////////////////////////////////////////////////////////////////	
-	//document.detailForm.action='/updateUser.do';
-	////////////////////////////////////////////////////////////////////////////////////
-	document.detailForm.action='/user/updateUser';
-	
-	document.detailForm.submit();
-}
 
-function check_email(frm) {
-	alert
-	var email=document.detailForm.email.value;
-    if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1)){
-    	alert("ÀÌ¸ŞÀÏ Çü½ÄÀÌ ¾Æ´Õ´Ï´Ù.");
-		return false;
-    }
-    return true;
-}
+		$(function() {
+			$("a[href='#']:contains('í™•ì¸')").on("click" , function() {
+				fncUpdateUser();
+			});
+		});	
 
-function resetData() {
-	document.detailForm.reset();
-}
-*/
+		$(function() {
+			
+			$("input[name='email']").on("change" , function() {
+					
+				var email=$("input[name='email']").val();
+			
+				if(email != "" && (email.indexOf('@') < 1 || email.indexOf('.') == -1) ){
+				alert("ì´ë©”ì¼ í˜•ì‹ì´ ì•„ë‹™ë‹ˆë‹¤.");
+				}
+			});
+			
+		});	
+		
+		
+		$(function() {
+			$("a[href='#']:contains('ì·¨ì†Œ')").on("click" , function() {
+				$(self.location).attr("href", "/user/getUser?userId=${sessionScope.user.userId}");
+			});
+		});
+	
 </script>
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body>
 
-<form name="detailForm"  method="post" >
+	<jsp:include page="/layout/toolbar.jsp" />
 
-<%--<input type="hidden" name="userId" value="<%=user.getUserId() %>"> --%>
-<input type="hidden" name="userId" value="${user.userId}">
+	<form name="detailForm"  method="post" >
 
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37">
-			<img src="/images/ct_ttl_img01.gif" width="15" height="37"/>
-		</td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left:10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">È¸¿øÁ¤º¸¼öÁ¤</td>
-					<td width="20%" align="right">&nbsp;</td>
-				</tr>
+		<input type="hidden" name="userId" value="${user.userId}">
+		<input type="hidden" name="phone">
+
+		<div class="bd-example">
+			<table class="table table-striped">
+			<thead>
+			<tr>
+				<th scope="col" style="width: 20%;">íšŒì›ì •ë³´ìˆ˜ì •</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tr>
+				<th scope="row">ì•„ì´ë””</th>
+				<td>${user.userId}</td>
+			</tr>
+			<tr>
+				<th>ì´ë¦„</th>
+				<td><input type="text" name="userName" value="${user.userName}"></td>
+			</tr>
+			<tr>
+				<th>ì£¼ì†Œ</th>
+				<td><input type="text" name="addr" value="${user.addr}"></td>
+			</tr>
+			<tr>
+				<th>íœ´ëŒ€ì „í™”ë²ˆí˜¸</th>
+				<td>
+					<select name="phone1" style="width: 100px; height: 25px;">
+						<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
+						<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
+						<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
+						<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
+						<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
+					</select>
+					<input type="text" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}">
+					<input type="text" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}">
+				</td>
+			</tr>
+			<tr>
+				<th>ì´ë©”ì¼</th>
+				<td><input type="text" name="email" value="${user.email}"></td>
+			</tr>
+			<tr>
+				<th>ê°€ì…ì¼ì</th>
+				<td>${user.regDate}</td>
+			</tr>
 			</table>
-		</td>
-		<td width="12" height="37">
-			<img src="/images/ct_ttl_img03.gif" width="12" height="37" />
-		</td>
-	</tr>
-</table>
+		</div>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:13px;">
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">
-			¾ÆÀÌµğ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle" />
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<%--<td class="ct_write01"><%=user.getUserId() %>	</td> --%>
-		<td class="ct_write01">${user.userId}	</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">
-			ÀÌ¸§ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle" />
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="text" name="userName" value="${user.userName}" class="ct_input_g" 
-							style="width:100px; height:19px"  maxLength="50" >
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÁÖ¼Ò</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="text" name="addr" value="${user.addr}" class="ct_input_g" 
-							style="width:370px; height:19px"  maxLength="100">
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÈŞ´ëÀüÈ­¹øÈ£</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<select name="phone1" class="ct_input_g" style="width:50px; height:25px" 
-							onChange="document.detailForm.phone2.focus();">
-				
-				<option value="010" ${ ! empty user.phone1 && user.phone1 == "010" ? "selected" : ""  } >010</option>
-				<option value="011" ${ ! empty user.phone1 && user.phone1 == "011" ? "selected" : ""  } >011</option>
-				<option value="016" ${ ! empty user.phone1 && user.phone1 == "016" ? "selected" : ""  } >016</option>
-				<option value="018" ${ ! empty user.phone1 && user.phone1 == "018" ? "selected" : ""  } >018</option>
-				<option value="019" ${ ! empty user.phone1 && user.phone1 == "019" ? "selected" : ""  } >019</option>
-				
-			</select>
-			
-			<input 	type="text" name="phone2" value="${ ! empty user.phone2 ? user.phone2 : ''}" 
-							class="ct_input_g" style="width:100px; height:19px"  maxLength="9" >
-			- 
-			<input 	type="text" name="phone3" value="${ ! empty user.phone3 ? user.phone3 : ''}"  
-							class="ct_input_g" style="width:100px; height:19px"  maxLength="9" >
-							
-			<input type="hidden" name="phone" class="ct_input_g"  />
-		</td>
-	</tr>
+		<p class="text-end">
+			<a class="btn btn-lg" href="#" role="button" style="background-color: #cecdcd;">í™•ì¸</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="btn btn-lg" href="#" role="button" style="background-color: #cecdcd;">ì·¨ì†Œ</a>
+		</p>
 
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÀÌ¸ŞÀÏ </td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">
-			<input 	type="text" name="email" value="${user.email}" class="ct_input_g" 
-							style="width:100px; height:19px" onChange="check_email(this.form);">
-		</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:10px;">
-	<tr>
-		<td width="53%">	</td>
-		<td align="right">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23" />
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:fncUpdateUser();">¼öÁ¤</a> -->
-						¼öÁ¤
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23" />
-					</td>
-					<td width="30"></td>					
-					<td width="17" height="23">
-						<img src="/images/ct_btnbg01.gif" width="17" height="23" />
-					</td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:resetData();">Ãë¼Ò</a> -->
-						Ãë¼Ò
-					</td>
-					<td width="14" height="23">
-						<img src="/images/ct_btnbg03.gif" width="14" height="23" />
-					</td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
-
-</form>
+	</form>
 
 </body>
 </html>

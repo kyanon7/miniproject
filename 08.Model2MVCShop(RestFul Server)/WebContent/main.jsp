@@ -1,45 +1,61 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
-
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Model2MVCShop</title>
 	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
-			integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<!-- Latest bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+			integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" 
-			integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js" 
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
 			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" 
-			integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 	
-	<!-- Bootstrap Dropdown Hover CSS -->
-	<link href="/css/animate.min.css" rel="stylesheet">
-	<link href="/css/bootstrap-dropdownhover.min.css" rel="stylesheet">
-	<!-- Bootstrap Dropdown Hover JS -->
-	<script src="/javascript/bootstrap-dropdownhover.min.js"></script>
+   	<!--  ///////////////////////// JavaScript ////////////////////////// -->
+	<script type="text/javascript">
+		
+		$( function() {
+			$("a[href='#' ]:contains('íšŒì›ê°€ì…')").on("click" , function() {
+				location.href = "/user/addUser"
+			});
+		});
+		
+		$( function() {
+			$("a[href='#' ]:contains('ë¡œ ê·¸ ì¸')").on("click" , function() {
+				location.href = "/user/login"
+			});
+		});
+
+		$( function() {
+			$("a[href='#' ]:contains('ìƒí’ˆê²€ìƒ‰')").on("click" , function() {
+				location.href = "/product/listProduct?menu=search"
+			});
+		});
+
+		$( function() {
+			$("a[href='#' ]:contains('ìµœê·¼ ë³¸ ìƒí’ˆ')").on("click" , function() {
+				popWin = window.open("/history.jsp","popWin","left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+			});
+		});
+		
+	</script>
 	
-	<!--  CSS Ãß°¡ : Åø¹Ù¿¡ È­¸é °¡¸®´Â Çö»ó ÇØ°á :  ÁÖ¼®Ã³¸® Àü, ÈÄ È®ÀÎ-->
-	<style>
+</head>
+<!DOCTYPE html>
+	<!--  CSS ì¶”ê°€ : íˆ´ë°”ì— í™”ë©´ ê°€ë¦¬ëŠ” í˜„ìƒ í•´ê²° :  ì£¼ì„ì²˜ë¦¬ ì „, í›„ í™•ì¸-->
+	<!--<style>
         body {
             padding-top : 70px;
         }
-   	</style>
-   	
-     <!--  ///////////////////////// JavaScript ////////////////////////// -->
-	 	
+   	</style>-->
 	
 </head>
 	
@@ -47,28 +63,20 @@
 
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
-   	<!-- ToolBar End /////////////////////////////////////-->
+	<!-- ToolBar End /////////////////////////////////////-->
 
-	<!--  ¾Æ·¡ÀÇ ³»¿ëÀº http://getbootstrap.com/getting-started/  ÂüÁ¶ -->	
-   	<div class="container ">
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>Model2MVCShop </h1>
-        <p>J2SE , DBMS ,JDBC , Servlet & JSP, Java Framework , HTML5 , UI Framework ÇĞ½À ÈÄ Mini-Project ÁøÇà</p>
-     </div>
-    </div>
-
-	<!-- ÂüÁ¶ : http://getbootstrap.com/css/   : container part..... -->
-	<div class="container">
-        <h3>³ªÆú·¹¿ËÀº ÀÌ·¸°Ô ¸»Çß´Ù.</h3>
-        <p>"¿À´Ã ³ªÀÇ ºÒÇàÀº ¾ğÁ¨°¡ ³»°¡ Àß¸ø º¸³½ ½Ã°£ÀÇ º¸º¹ÀÌ´Ù."</p>
-  	 	<h3>"... Àåº®Àº Àı½ÇÇÏ°Ô ¿øÇÏÁö ¾Ê´Â »ç¶÷µéÀ» °É·¯³»·Á°í Á¸ÀçÇÕ´Ï´Ù. Àåº®Àº. ´ç½ÅÀÌ ¾Æ´Ï¶ó '´Ù¸¥' »ç¶÷µéÀ» ¸ØÃß°Ô ÇÏ·Á°í °Å±â ÀÖ´Â °ÍÀÌÁö¿ä."</h3>
-         <h3>Çı±¤½º´Ô</h3>
-         <p>Çàº¹ÇÑ »îÀÇ ºñ°áÀº.</p>
-         <p>ÁÁ¾ÆÇÏ´Â ÀÏÀ» ÇÏ´Â °ÍÀÌ ¾Æ¸®¶ó,</p>
-         <p>Áö±İ ÇÏ´Â ÀÏÀ» ÁÁ¾ÆÇÏ´Â °ÍÀÔ´Ï´Ù.</p>
-  	 </div>
-
+   	<div class="container bg-light p-5">
+		<h1>Model2MVCShop </h1>
+		<p>J2SE , DBMS ,JDBC , Servlet & JSP, Java Framework , HTML5 , UI Framework í•™ìŠµ í›„ Mini-Project ì§„í–‰</p>
+		<hr class="my-4">
+		<h3>ë‚˜í´ë ˆì˜¹ì€ ì´ë ‡ê²Œ ë§í–ˆë‹¤.</h3>
+		<p>"ì˜¤ëŠ˜ ë‚˜ì˜ ë¶ˆí–‰ì€ ì–¸ì  ê°€ ë‚´ê°€ ì˜ëª» ë³´ë‚¸ ì‹œê°„ì˜ ë³´ë³µì´ë‹¤."</p><br />
+		<h3>"... ì¥ë²½ì€ ì ˆì‹¤í•˜ê²Œ ì›í•˜ì§€ ì•ŠëŠ” ì‚¬ëŒë“¤ì„ ê±¸ëŸ¬ë‚´ë ¤ê³  ì¡´ì¬í•©ë‹ˆë‹¤. ì¥ë²½ì€. ë‹¹ì‹ ì´ ì•„ë‹ˆë¼ 'ë‹¤ë¥¸' ì‚¬ëŒë“¤ì„ ë©ˆì¶”ê²Œ í•˜ë ¤ê³  ê±°ê¸° ìˆëŠ” ê²ƒì´ì§€ìš”."</h3><br />
+		<p class="h3">í˜œê´‘ìŠ¤ë‹˜</p>
+		<p>í–‰ë³µí•œ ì‚¶ì˜ ë¹„ê²°ì€.</p>
+		<p>ì¢‹ì•„í•˜ëŠ” ì¼ì„ í•˜ëŠ” ê²ƒì´ ì•„ë¦¬ë¼,</p>
+		<p>ì§€ê¸ˆ í•˜ëŠ” ì¼ì„ ì¢‹ì•„í•˜ëŠ” ê²ƒì…ë‹ˆë‹¤.</p>
+	</div>
 </body>
 
 </html>

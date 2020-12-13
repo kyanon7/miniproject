@@ -1,174 +1,112 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-
-<!--  ///////////////////////// JSTL  ////////////////////////// -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- ///////////////////////////// ·Î±×ÀÎ½Ã Forward  /////////////////////////////////////// -->
+<!-- ///////////////////////////// ë¡œê·¸ì¸ì‹œ Forward  /////////////////////////////////////// -->
  <c:if test="${ ! empty user }">
  	<jsp:forward page="main.jsp"/>
  </c:if>
  <!-- //////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-
 <!DOCTYPE html>
-
 <html lang="ko">
 	
 <head>
-	<meta charset="EUC-KR">
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Model2MVCShop</title>
 	
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" 
-			integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<!-- Latest bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+			integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
 	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" 
-			integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js" 
 			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" 
-			integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 	
-	<!--  ///////////////////////// CSS ////////////////////////// -->
-	<style></style>
-   	
    	<!--  ///////////////////////// JavaScript ////////////////////////// -->
 	<script type="text/javascript">
 		
-		//============= È¸¿ø°¡ÀÔ È­¸éÀÌµ¿ =============
 		$( function() {
-			//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-			$("a[href='#' ]:contains('È¸¿ø°¡ÀÔ')").on("click" , function() {
-				self.location.href = "/user/addUser"
+			$("a[href='#' ]:contains('íšŒì›ê°€ì…')").on("click" , function() {
+				location.href = "/user/addUser"
 			});
 		});
 		
-		//============= ·Î±×ÀÎ È­¸éÀÌµ¿ =============
 		$( function() {
-			//==> Ãß°¡µÈºÎºĞ : "addUser"  Event ¿¬°á
-			$("a[href='#' ]:contains('·Î ±× ÀÎ')").on("click" , function() {
+			$("a[href='#' ]:contains('ë¡œ ê·¸ ì¸')").on("click" , function() {
 				location.href = "/user/login"
 			});
 		});
+
+		$( function() {
+			$("a[href='#' ]:contains('ìƒí’ˆê²€ìƒ‰')").on("click" , function() {
+				location.href = "/product/listProduct?menu=search"
+			});
+		});
+
+		$( function() {
+			$("a[href='#' ]:contains('ìµœê·¼ ë³¸ ìƒí’ˆ')").on("click" , function() {
+				popWin = window.open("/history.jsp","popWin","left=300, top=200, width=300, height=200, marginwidth=0, marginheight=0, scrollbars=no, scrolling=no, menubar=no, resizable=no");
+			});
+		});
 		
-	</script>	
+	</script>
 	
 </head>
 
 <body>
 
 	<!-- ToolBar Start /////////////////////////////////////-->
-	<div class="navbar  navbar-default">
-		
-        <div class="container">
-        
-        	<a class="navbar-brand" href="#">Model2 MVC Shop</a>
-			
-			<!-- toolBar Button Start //////////////////////// -->
-			<div class="navbar-header">
-			    <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#target">
-			        <span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			    </button>
-			</div>
-			<!-- toolBar Button End //////////////////////// -->
-			
-			<div class="collapse navbar-collapse"  id="target">
-	             <ul class="nav navbar-nav navbar-right">
-	                 <li><a href="#">È¸¿ø°¡ÀÔ</a></li>
-	                 <li><a href="#">·Î ±× ÀÎ</a></li>
-	           	</ul>
-	       </div>
-   		
-   		</div>
-   	</div>
-   	<!-- ToolBar End /////////////////////////////////////-->
-   	
-	<!--  È­¸é±¸¼º div Start /////////////////////////////////////-->
-	<div class="container">
-		
-		<!-- ´Ù´Ü·¹ÀÌ¾Æ¿ô  Start /////////////////////////////////////-->
-		<div class="row">
-	
-			<!--  Menu ±¸¼º Start /////////////////////////////////////-->     	
-			<div class="col-md-3">
-		        
-		       	<!--  È¸¿ø°ü¸® ¸ñ·Ï¿¡ Á¦¸ñ -->
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<i class="glyphicon glyphicon-heart"></i> È¸¿ø°ü¸®
-         			</div>
-         			<!--  È¸¿ø°ü¸® ¾ÆÀÌÅÛ -->
-					<ul class="list-group">
-						 <li class="list-group-item">
-						 	<a href="#">°³ÀÎÁ¤º¸Á¶È¸</a> <i class="glyphicon glyphicon-ban-circle"></i>
-						 </li>
-						 <li class="list-group-item">
-						 	<a href="#">È¸¿øÁ¤º¸Á¶È¸</a> <i class="glyphicon glyphicon-ban-circle"></i>
-						 </li>
-					</ul>
-		        </div>
-               
-               
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-							<i class="glyphicon glyphicon-briefcase"></i> ÆÇ¸Å»óÇ°°ü¸®
-         			</div>
-					<ul class="list-group">
-						 <li class="list-group-item">
-						 	<a href="#">ÆÇ¸Å»óÇ°µî·Ï</a> <i class="glyphicon glyphicon-ban-circle"></i>
-						 </li>
-						 <li class="list-group-item">
-						 	<a href="#">ÆÇ¸Å»óÇ°°ü¸®</a> <i class="glyphicon glyphicon-ban-circle"></i>
-						 </li>
-					</ul>
-		        </div>
-               
-               
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-							<i class="glyphicon glyphicon-shopping-cart"></i> »óÇ°±¸¸Å
-	    			</div>
-					<ul class="list-group">
-						 <li class="list-group-item"><a href="#">»óÇ°°Ë»ö</a></li>
-						  <li class="list-group-item">
-						  	<a href="#">±¸¸ÅÀÌ·ÂÁ¶È¸</a> <i class="glyphicon glyphicon-ban-circle"></i>
-						  </li>
-						 <li class="list-group-item">
-						 	<a href="#">ÃÖ±Ùº»»óÇ°</a> <i class="glyphicon glyphicon-ban-circle"></i>
-						 </li>
-					</ul>
-				</div>
-				
-			</div>
-			<!--  Menu ±¸¼º end /////////////////////////////////////-->   
+	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/index.jsp">
+				<img class="img" src="/images/bit-logo.svg" style="background-color: #ffffff;">&nbsp; Model2 MVC Shop</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+					data-bs-target="#navbarColor03" aria-controls="navbarColor03" 
+					aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span></button>
 
-	 	 	<!--  Main start /////////////////////////////////////-->   		
-	 	 	<div class="col-md-9">
-				<div class="jumbotron">
-			  		<h1>Model2 MVC Shop</h1>
-			  		<p>·Î±×ÀÎ ÈÄ »ç¿ë°¡´É...</p>
-			  		<p>·Î±×ÀÎ Àü °Ë»ö¸¸ °¡´ÉÇÕ´Ï´Ù.</p>
-			  		<p>È¸¿ø°¡ÀÔ ÇÏ¼¼¿ä.</p>
-			  		
-			  		<div class="text-center">
-			  			<a class="btn btn-info btn-lg" href="#" role="button">È¸¿ø°¡ÀÔ</a>
-			  			<a class="btn btn-info btn-lg" href="#" role="button">·Î ±× ÀÎ</a>
-			  		</div>
-			  	
-			  	</div>
-	        </div>
-	   	 	<!--  Main end /////////////////////////////////////-->   		
-	 	 	
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="#">ìƒí’ˆê²€ìƒ‰</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">ìµœê·¼ ë³¸ ìƒí’ˆ</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="#">íšŒì›ê°€ì…</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">ë¡œ ê·¸ ì¸</a>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<!-- ´Ù´Ü·¹ÀÌ¾Æ¿ô  end /////////////////////////////////////-->
-		
+	</nav>
+	<!-- ToolBar End /////////////////////////////////////-->
+
+	<div class="container bg-light p-5">
+		<h1 class="display-3">Model2 MVC Shop</h1>
+		<p class="lead">ë¡œê·¸ì¸ í›„ ì‚¬ìš© ê°€ëŠ¥...</p>
+		<p class="lead">ë¡œê·¸ì¸ ì „ ê²€ìƒ‰ë§Œ ê°€ëŠ¥í•©ë‹ˆë‹¤.</p>
+		<p class="lead">íšŒì›ê°€ì… í•˜ì„¸ìš”.</p>
+		<hr class="my-4">
+		<p class="text-center">
+			<a class="btn btn-primary btn-lg" href="#" role="button">íšŒì›ê°€ì…</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="btn btn-primary btn-lg" href="#" role="button">ë¡œ ê·¸ ì¸</a>
+		</p>
 	</div>
-	<!--  È­¸é±¸¼º div end /////////////////////////////////////-->
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+			integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
 </body>
 

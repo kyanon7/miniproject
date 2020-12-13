@@ -1,157 +1,83 @@
-<%@ page contentType="text/html; charset=EUC-KR" %>
-<%@ page pageEncoding="EUC-KR"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
+<html lang="ko">
 
-<html>
 <head>
-	<meta charset="EUC-KR">
-	<title>È¸¿øÁ¤º¸Á¶È¸</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>ê°œì¸ì •ë³´ì¡°íšŒ</title>
+	
+	<!-- Latest bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+			integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-	<link rel="stylesheet" href="/css/admin.css" type="text/css">
-
-	<!-- CDN(Content Delivery Network) È£½ºÆ® »ç¿ë -->
-	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<!-- Optional theme -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+			integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	
 	<script type="text/javascript">
-		
-		//==> Ãß°¡µÈºÎºĞ : "¼öÁ¤" "È®ÀÎ"  Event ¿¬°á ¹× Ã³¸®
-		 $(function() {
-			//==> DOM Object GET 3°¡Áö ¹æ¹ı ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
-			//==> 1 °ú 3 ¹æ¹ı Á¶ÇÕ : $("tagName.className:filterÇÔ¼ö") »ç¿ëÇÔ.	
-			 $( "td.ct_btn01:contains('È®ÀÎ')" ).on("click" , function() {
-				//Debug..
-				//alert(  $( "td.ct_btn01:contains('È®ÀÎ')" ).html() );
-				history.go(-1);
-			});
-			
-			 $( "td.ct_btn01:contains('¼öÁ¤')" ).on("click" , function() {
-					//Debug..
-					//alert(  $( "td.ct_btn01:contains('¼öÁ¤')" ).html() );
-					self.location = "/user/updateUser?userId=${user.userId}"
+			$(function() {
+				$("a[href='#' ]:contains('ìˆ˜ì •')").on("click" , function() {
+					$(self.location).attr("href", "/user/updateUser?userId=${user.userId}");
 				});
-		});
-		
+				
+				$("a[href='#' ]:contains('í™•ì¸')").on("click" , function() {
+					$(self.location).attr("href", "../main.jsp");
+				});
+			});
 	</script>
-
 </head>
 
-<body bgcolor="#ffffff" text="#000000">
+<body>
 
-<table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
-	<tr>
-		<td width="15" height="37"><img src="/images/ct_ttl_img01.gif" width="15" height="37"></td>
-		<td background="/images/ct_ttl_img02.gif" width="100%" style="padding-left:10px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="93%" class="ct_ttl01">È¸¿øÁ¤º¸Á¶È¸</td>
-					<td width="20%" align="right">&nbsp;</td>
-				</tr>
-			</table>
-		</td>
-		<td width="12" height="37">
-			<img src="/images/ct_ttl_img03.gif" width="12" height="37"/>
-		</td>
-	</tr>
-</table>
+	<jsp:include page="/layout/toolbar.jsp" />
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin-top:13px;">
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">
-			¾ÆÀÌµğ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${user.userId}</td>
-	</tr>
+	<div class="bd-example">
+        <table class="table table-striped">
+		<thead>
+		<tr>
+			<th scope="col" style="width: 20%;">ê°œì¸ì •ë³´ì¡°íšŒ</th>
+			<th></th>
+		</tr>
+		</thead>
+		<tr>
+            <th scope="row">ì•„ì´ë””</th>
+            <td>${user.userId}</td>
+		</tr>
+		<tr>
+            <th>ì´ë¦„</th>
+            <td>${user.userName}</td>
+		</tr>
+		<tr>
+            <th>ì£¼ì†Œ</th>
+            <td>${user.addr}</td>
+		</tr>
+		<tr>
+            <th>íœ´ëŒ€ì „í™”ë²ˆí˜¸</th>
+            <td>${ !empty user.phone ? user.phone : ''}</td>
+		</tr>
+		<tr>
+            <th>ì´ë©”ì¼</th>
+            <td>${user.email}</td>
+		</tr>
+		<tr>
+            <th>ê°€ì…ì¼ì</th>
+            <td>${user.regDate}</td>
+		</tr>
+        </table>
+	</div>
 
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
+	<p class="text-end">
+		<a class="btn btn-lg" href="#" role="button" style="background-color: #cecdcd;">ìˆ˜ì •</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<a class="btn btn-lg" href="#" role="button" style="background-color: #cecdcd;">í™•ì¸</a>
+	</p>
 	
-	<tr>
-		<td width="104" class="ct_write">
-			ÀÌ¸§ <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle" />
-		</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${user.userName}</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÁÖ¼Ò</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${user.addr}</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÈŞ´ëÀüÈ­¹øÈ£</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${ !empty user.phone ? user.phone : ''}	</td>
-	</tr>
-
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">ÀÌ¸ŞÀÏ </td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${user.email}</td>
-	</tr>
-
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-	<tr>
-		<td width="104" class="ct_write">°¡ÀÔÀÏÀÚ</td>
-		<td bgcolor="D6D6D6" width="1"></td>
-		<td class="ct_write01">${user.regDate}</td>
-	</tr>
-	
-	<tr>
-		<td height="1" colspan="3" bgcolor="D6D6D6"></td>
-	</tr>
-	
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top:10px;">
-	<tr>
-		<td width="53%"></td>
-		<td align="right">
-			<table border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="17" height="23"><img src="/images/ct_btnbg01.gif" width="17" height="23"></td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="/user/updateUser?userId=${user.userId}">¼öÁ¤</a> -->
-						¼öÁ¤
-					</td>
-					<td width="14" height="23"><img src="/images/ct_btnbg03.gif" width="14" height="23"></td>
-					<td width="30"></td>					
-					<td width="17" height="23"><img src="/images/ct_btnbg01.gif" width="17" height="23"></td>
-					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<!-- <a href="javascript:history.go(-1);">È®ÀÎ</a> -->
-						È®ÀÎ
-					</td>
-					<td width="14" height="23"><img src="/images/ct_btnbg03.gif" width="14" height="23"></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+	<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" 
+	integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> -->
 
 </body>
 </html>
